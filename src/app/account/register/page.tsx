@@ -13,7 +13,6 @@ const initialState = {
 export default function Register() {
   const [state, formAction] = useFormState(createUser, initialState);
 
-  console.log(state)
   return (
     <form className='bg-white rounded-lg h-screen flex xl:pl-36 lg:pl-24' action={formAction}>
 
@@ -53,6 +52,7 @@ export default function Register() {
         <div className="flex gap-2 pt-4 pb-4 mb-8">
           <input type="checkbox" className='checkbox-login'/> I agree to EnterpriseCHAI’s Terms & Conditions and Privacy Policy
         </div>
+          <p className={'text-warning'}>{state.message}</p>
           <SubmitButton/>
         <div className='w-full flex justify-between  items-center mt-20'>
           <button className='btn-login'>

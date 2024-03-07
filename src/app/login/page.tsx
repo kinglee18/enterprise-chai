@@ -16,19 +16,17 @@ const initialState = {
 export default function Login() {
   const [state, formAction] = useFormState(authenticate, initialState);
 
-  console.log(state);
-
 
   return (
     <form className='bg-white rounded-lg h-screen flex xl:pl-36 lg:pl-24' action={formAction}>
 
       <div className='w-7/12 flex-col p-10'>
         <div className='w-9/12'>
-          <a className="flex brand-name text-2xl text-white place-items-center" href={'/'}>
+          <a className="flex text-2xl place-items-center text-primarySmall font-medium" href={'/'}>
             <span>Enterprise</span>
             <Image src="/cup_logo.svg" alt="Logo" width={43} height={45} className={'mx-1 mb-3'}/>
-            <span className={'font-medium'}>CH</span>
-            <span className={'font-medium'}>AI</span>
+            <span className={'font-medium text-primarySmall font-bold'}>CH</span>
+            <span className={'font-medium text-greenLogo font-bold'}>AI</span>
           </a>
           <p className='welcome-back'>Welcome back!</p>
           <h3 className='mb-10'>Enter your credentials to access your account</h3>
@@ -60,6 +58,8 @@ export default function Login() {
         </div>
         <div className="flex gap-2 pt-4 pb-4 mb-8">
           <input type="checkbox" className='checkbox-login'/> Remember me
+          <p className={'text-warning'}>{state.message}</p>
+
         </div>
         <LoginButton />
         <div className='w-full flex justify-between  items-center mt-20'>

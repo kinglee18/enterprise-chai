@@ -14,10 +14,6 @@ export default function Aside() {
                 <Image src={'/Dashboard.svg'} alt='dashboard logo' width={18} height={18}/>
                 Dashboard
             </a>
-            <a className="btn-dashboard" href={'/home/intents'}>
-                <Image src={'/Intent.svg'} alt='intent logo' width={18} height={18}/>
-                Set intent
-            </a>
             <a className="btn-dashboard" href={'/home/materials'}>
                 <Image src={'/Materials.svg'} alt='materials logo' width={18} height={18}/>
                 Materials

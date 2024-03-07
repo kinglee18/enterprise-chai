@@ -23,6 +23,7 @@ export default function ActiveChat({tabRecorder, selectedDeviceId}: ActiveChatPr
     const [microphoneMessages, setMicrophoneMessages] = useState<string[]>([]);
     const [tabMessages, setTabMessages] = useState<string[]>([]);
     const [completeSessionAlert, setCompleteSessionAlert] = useState(false);
+
     useEffect(() => {
         const handleStartCapture = async () => {
             const microphoneWS = new WebSocket(microphoneAudioSocket);
@@ -42,7 +43,6 @@ export default function ActiveChat({tabRecorder, selectedDeviceId}: ActiveChatPr
                         tabWS.send(evt.data);
                     }
                 })
-                tabRecorder.start(100)
 
                 microphoneWS.onopen = () => {
                     micRecorder.start(100)
@@ -53,23 +53,25 @@ export default function ActiveChat({tabRecorder, selectedDeviceId}: ActiveChatPr
                 microphoneWS.onmessage = (event) => {
                     setMicrophoneMessages(_value => [..._value, event.data]);
                 }
+                tabWS.onopen = () => {
+                    tabRecorder.start(100)
+                };
+                tabWS.onerror = (error) => {
+                    console.error('WebSocket error:', error);
+                };
+                tabWS.onmessage = (event) => {
+                    setTabMessages(_value => [..._value, event.data]);
+                }
                 return null
             } catch (error) {
                 console.error('Error capturing audio:', error);
             }
         };
-        handleStartCapture().then((tabWS) => {
+        handleStartCapture().then(() => {
             const assistantWS = new WebSocket(assistantSocket);
             assistantWS.onmessage = (event) => {
                 setAssistantMessages(_value => [..._value, event.data]);
             }
-            if (tabWS) {
-        /*        tabWS.onmessage = (event) => {
-                    setTabMessages(_value => [..._value, event.data]);
-                }*/
-                console.log('Microphone capture started');
-                }
-
         })
     }, [selectedDeviceId, tabRecorder]);
 

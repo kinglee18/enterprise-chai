@@ -1,10 +1,9 @@
 "use server";
 
 import { z } from "zod";
-//import { redirect } from 'next/navigation'
-import {signIn} from "../../auth";
-import {AuthError} from "next-auth";
+import {signInApp} from "../../auth";
 import {redirect} from "next/navigation";
+import {cookies} from "next/headers";
 
 export async function createUser(
     prevState: {
@@ -13,8 +12,8 @@ export async function createUser(
     formData: FormData,
 ) {
     const schema = z.object({
-        email: z.string().email(),
-        password: z.string().min(8)
+        email: z.string().email({ message: "Invalid email"}),
+        password: z.string().min(8, { message: "Password must be at least 8 characters long"})
     });
     const parse = schema.safeParse({
         email: formData.get("email"),
@@ -22,7 +21,7 @@ export async function createUser(
     });
 
     if (!parse.success) {
-        return { message: "Failed to create todo" };
+        return { message: parse.error.errors[0].message };
     }
 
     const data = parse.data;
@@ -46,10 +45,9 @@ export async function createUser(
         }
     } catch (e) {
         console.log(e)
-        return { message: 'failed to create user'}
+        return { message: 'failed to create user try with another email'}
     }
-    redirect("/home/dashboard");
-
+    redirect("/login");
 }
 
 export async function authenticate(
@@ -58,22 +56,14 @@ export async function authenticate(
 ) {
     try {
         console.log('success')
-        const response = await signIn('credentials', {
-            email: formData.get("email") as string,
-            password: formData.get("password") as string,
-            redirectTo: '/home/dashboard'
-        })
+        const response = await signInApp(formData.get("email") as string, formData.get("password") as string)
+        if (response.token) {
+            cookies().set('token', response.token)
+        }
         console.log(response)
     } catch (error) {
-        if (error instanceof AuthError) {
-            switch (error.type) {
-                case 'CredentialsSignin':
-                    return 'Invalid credentials.';
-                default:
-                    return 'Something went wrong.';
-            }
-        }
         throw error;
     }
+    redirect("/home/dashboard");
 }
 

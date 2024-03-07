@@ -191,3 +191,7 @@ span{
 .svg-white {
   filter: invert(1) grayscale(100%) brightness(200%);
 }
+
+.nextjs-toast-errors-parent {
+  display: none;
+}
