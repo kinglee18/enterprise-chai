@@ -54,16 +54,12 @@ export async function authenticate(
     prevState: string | undefined,
     formData: FormData,
 ) {
-    try {
-        console.log('success')
-        const response = await signInApp(formData.get("email") as string, formData.get("password") as string)
-        if (response.token) {
-            cookies().set('token', response.token)
-        }
-        console.log(response)
-    } catch (error) {
-        throw error;
+
+    const response = await signInApp(formData.get("email") as string, formData.get("password") as string)
+    if (response.token !== null) {
+        cookies().set('token', response.token)
+        redirect("/home/dashboard");
     }
-    redirect("/home/dashboard");
+    return { message: response.message };
 }
 

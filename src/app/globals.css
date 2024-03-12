@@ -198,6 +198,6 @@ span{
   filter: invert(1) grayscale(100%) brightness(200%);
 }
 
-.nextjs-toast-errors-parent {
+nextjs-portal {
   display: none;
 }

@@ -1,10 +1,10 @@
-'use client'
 import Table from "@/components/Table";
 import React, {useEffect} from "react";
 import {getMaterials} from "@/services/materials";
 
-export default function MaterialsTable() {
-    const [data, setData] = React.useState([])
+export default function MaterialsTable({data}) {
+    console.log(data)
+/*    const [data, setData] = React.useState([])
     useEffect(() => {
         const init = async () => {
             const data = await getMaterials();
@@ -12,7 +12,7 @@ export default function MaterialsTable() {
 
         }
         init()
-    }, [])
+    }, [])*/
     return (<Table
         title={'Call summary'}
         columns={[
@@ -21,6 +21,6 @@ export default function MaterialsTable() {
             {title: 'Tags', key: 'tags', width: '20%'},
             {title: 'Date', key: 'uploaded_at', width: '20%'},
         ]}
-        data={[]}
+        data={data || []}
     />)
 }

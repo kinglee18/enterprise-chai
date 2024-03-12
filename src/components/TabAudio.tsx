@@ -36,12 +36,16 @@ export default function TabAudio({recorder, setActiveSession, handleTabAudio}: T
             />}
         </div>
       </div>
-      <div className='flex flex-col  justify-center items-center'>
-          <div className={'p-3 bg-white w-11/12 my-3 text-viewPlaceholder'}>{recorder !== null ? 'Recording tab' : 'no tab selected'}</div>
-          <button className='btn-primary' onClick={handleTabAudio}>Configure</button>
+      <div className='flex flex-col  justify-center items-center' onClick={handleTabAudio}>
+          <div className={'p-3 bg-white w-11/12 my-3 text-viewPlaceholder cursor-pointer'}>{recorder !== null ? 'Recording tab' : 'no tab selected'}</div>
+          <button className='btn-primary' >Configure</button>
       </div>
       <div className='mt-16 flex justify-end'>
-          {recorder && <button className="btn-secondary place-self-end" onClick={handleContinue}>Continue</button>}
+          <button
+              className={`${recorder ?'btn-primary' : 'btn-secondary' } place-self-end`}
+              onClick={handleContinue}
+                disabled={!recorder}
+          >Continue</button>
       </div>
     </div>
   )

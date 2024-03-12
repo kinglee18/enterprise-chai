@@ -16,7 +16,7 @@ const initialState = {
 export default function Login() {
   const [state, formAction] = useFormState(authenticate, initialState);
 
-
+console.log(state)
   return (
     <form className='bg-white rounded-lg h-screen flex xl:pl-36 lg:pl-24' action={formAction}>
 
@@ -57,7 +57,6 @@ export default function Login() {
           </div>
         </div>
         <div className="flex gap-2 pt-4 pb-4 mb-8">
-          <input type="checkbox" className='checkbox-login'/> Remember me
           <p className={'text-warning'}>{state.message}</p>
 
         </div>

@@ -18,20 +18,22 @@ const login = async (email: string, password: string) => {
         },
         cache: 'no-cache',
     })
-    return await response.json() as Promise<LoginResponse>
+    return response
 }
 
 export const  signInApp = async (email: string, password: string) => {
     const parsedCredentials = z
-        .object({ email: z.string().email(), password: z.string().min(6) })
+        .object({ email: z.string().email(), password: z.string() })
         .safeParse({ email, password });
     if (!parsedCredentials.success) {
-        return { message: 'Invalid credentials' , token: null};
+        return { message: 'Invalisd credentials' , token: null};
     }
     const credentials = parsedCredentials.data;
-    const response = await login(credentials.email, credentials.password);
-    if (response.token) {
-        return { token: response.token, email: credentials.email }
+    let  response =  await login(credentials.email, credentials.password);
+    if (response.status === 200) {
+        const json: LoginResponse = await response.json()
+        return { message: 'success', token: json.token };
     }
-    return { message: 'Invalid credentials' , token: null };
+    return { message: 'Invalid credentials', token: null };
+
 }
