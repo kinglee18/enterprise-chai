@@ -59,14 +59,29 @@ body {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(102, 102, 102, 0.05) 100%), #FFF;
     @apply w-[209px] h-10 border-solid border-2 rounded-lg border-borderGray text-blackMediumC text-sm text-center align-middle py-2 px-3
   }
+  .btn-support {
+    @apply w-[240px] h-20 text-base text-blackMediumC font-semibold flex items-center justify-center  p-6 gap-x-4 bg-white rounded-md shadow-lg text-center
+  }
   .form-input {
     @apply w-[570px] h-[59px] mt-1 block  rounded-md border border-gray-400 p-4
   }
   .form-textarea{
     @apply w-[570px] h-[132px] mt-1 block rounded-md border border-gray-400 p-4
   }
+  .modal-textarea {
+    @apply w-[513px] h-[94px] mt-1 block rounded-md border border-gray-400 p-4
+  }
+  .modal-btn {
+    @apply w-[152px] h-12 py-2 px-4 bg-grayPlate text-white font-bold rounded-lg shadow-md focus:outline-none;
+  }
+  .modal-input {
+    @apply w-full h-8 mt-1 block rounded-md border border-gray-400 p-4
+  }
   .search-input {
     @apply w-64 h-10 rounded-md border border-grayDark text-sm p-2.5;
+  }
+  .search-large-input {
+    @apply  w-full h-10 rounded-md border border-grayDark text-sm p-2.5;
   }
   .welcome-back {
     @apply text-2xl text-blackMediumC mt-4 mb-2;
