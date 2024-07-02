@@ -99,6 +99,7 @@ function SubmitButton({
             type="submit"
             className={'w-full'}
             aria-disabled={pending}
+            isLoading={pending}
             isDisabled={!checked}
             color="primary">
       Create an account
