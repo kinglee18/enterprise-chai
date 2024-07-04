@@ -12,13 +12,9 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en">
-            <body>
-                <div className="flex h-screen">
-                    <Aside />
-                    {children}
-                </div>
-            </body>
-        </html>
+        <div className="flex h-screen">
+            <Aside />
+            {children}
+        </div>
     )
 }
