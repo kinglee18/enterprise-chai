@@ -14,6 +14,7 @@ export const saveSession = async (
         product: z.string(),
         point_of_contact: z.string(),
         description: z.string(),
+        customer_email: z.string().email(),
     });
 
     const parse = schema.safeParse({
@@ -21,6 +22,7 @@ export const saveSession = async (
         product: formData.get("product"),
         point_of_contact: formData.get("point_of_contact"),
         description: formData.get("description"),
+        customer_email: formData.get("customer_email")
     });
 
     if (!parse.success) {

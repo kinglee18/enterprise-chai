@@ -55,6 +55,16 @@ export const CSMForm = ({phases, products}: CSMFormProps) => {
             />
         </div>
         <div className="block">
+            <span className="text-gray-700">Customer email *</span>
+            <input
+                required
+                type="email"
+                className="form-input mt-1 block w-full"
+                name={'customer_email'}
+                placeholder="customer email"
+            />
+        </div>
+        <div className="block">
             <span className="text-gray-700">Product*</span>
             <select required className="p-2 h-12 border rounded flex items-center w-full" name={'product'}>
                 {
@@ -68,9 +78,7 @@ export const CSMForm = ({phases, products}: CSMFormProps) => {
             <span className="text-gray-700">Description</span>
             <textarea
                 className="form-input  block w-full h-28"
-                name={'description'}
-                placeholder={
-                    customerName ? `You are about to start an onboarding call with ${customerName}. In the previous call, we covered what the company does for this customer and roles and responsibility intake for the client side. In this call try to continue the conversation about the goals and objectives for purchasing your product. Ask if they have prior experience with similar products.` : ''}>
+                name={'description'}>
             </textarea>
         </div>
         <div className={'flex justify-around'}>
