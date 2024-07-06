@@ -21,8 +21,6 @@ export const CSMForm = ({phases, products}: CSMFormProps) => {
 
     // eslint-disable-next-line no-unused-vars
     const [state, formAction] = useFormState(saveSession, initialState);
-    const [customerName, setCustomerName] = React.useState<string | string[]>('');
-
     if (state?.session) {
         window.open(`/session/${state.session}/active`, "CSMWindow", "popup")
     }
@@ -45,13 +43,6 @@ export const CSMForm = ({phases, products}: CSMFormProps) => {
                 className="form-input mt-1 block w-full"
                 name={'point_of_contact'}
                 placeholder="customer point of contact name"
-                onChange={
-                    (e) => {
-                        setTimeout(() => {
-                            setCustomerName(e.target.value)
-                        }, 4000)
-                    }
-                }
             />
         </div>
         <div className="block">
