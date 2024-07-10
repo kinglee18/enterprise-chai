@@ -5,7 +5,6 @@ export interface TableProps {
   title: string
   columns: TableColumn[];
   data: TableRow[];
-  rowUrl?: string;
 }
 export interface TableColumn {
   key: string;
@@ -57,21 +56,10 @@ export default function Table({title, columns, data}: TableProps) {
 
 
                             <tr key={index} className="h-9">
-
-                                {row.rowUrl ? <a href={row.rowUrl} className={'w-full contents'} target={'_blank'}>
-                                    {columns.map((column, colIndex) => (
-                                        <td key={colIndex}
-                                            className={`px-8 py-5 ${column.width}`}>{row[column.key]}</td>
-                                    ))}
-                                </a>
-                                    :
-                                    <>
-                                        {columns.map((column, colIndex) => (
-                                            <td key={colIndex}
-                                                className={`px-8 py-5 ${column.width}`}>{row[column.key]}</td>
-                                        ))}
-                                    </>
-                                }
+                                {columns.map((column, colIndex) => (
+                                    <td key={colIndex}
+                                        className={`px-8 py-5 ${column.width}`}>{row[column.key]}</td>
+                                ))}
                             </tr>
                         ))}
                     </tbody>
