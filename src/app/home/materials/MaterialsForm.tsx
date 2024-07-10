@@ -1,21 +1,63 @@
 'use client'
-import {useFormState, useFormStatus} from "react-dom";
-import {saveFile} from "@/actions/materials";
 import React from "react";
 import Image from "next/image";
 import {Button} from "@nextui-org/react";
+import { MdCancel } from "react-icons/md";
+import {Tooltip} from "@nextui-org/tooltip";
+import { useRouter } from 'next/navigation'
 
-
-const initialState: any = {
-    message: "",
-};
 
 export const MaterialsForm = () => {
-    // eslint-disable-next-line no-unused-vars
-    const [state, formAction] = useFormState(saveFile, initialState);
-    const [filesName, setFilesName] = React.useState<any>('');
 
-    return <form className={'flex flex-col gap-4'} action={formAction}>
+    const router = useRouter();
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [formState, setFormState] = React.useState({
+        company: '',
+        name: '',
+        tags: '',
+    });
+    function extractToken(cookieString: string) {
+        const cookies = cookieString.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.indexOf('token=') === 0) {
+                return cookie.substring(6);
+            }
+        }
+        return null;
+    }
+
+
+    const [filesName, setFilesName] = React.useState<any[]>([]);
+    const onClick = async () => {
+        const formData = new FormData();
+        const token = extractToken(document.cookie)
+
+        formData.append('company', formState.company);
+        formData.append('name', formState.name);
+        formData.append('tags', formState.tags);
+        for (let i = 0; i < filesName.length; i++) {
+            formData.append('documents', filesName[i]);
+        }
+        try {
+            setIsLoading(true)
+            await fetch(process.env.NEXT_PUBLIC_BACKEND + '/product/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Authorization': 'Token ' + token
+                }
+            });
+            router.push('/home/materials')
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false)
+        }
+
+    }
+
+    return <form className={'flex flex-col gap-4'} action={onClick} >
         <label className="block">
             <span className="text-gray-700">Customer company *</span>
             <input
@@ -24,6 +66,13 @@ export const MaterialsForm = () => {
                 className="form-input mt-1 block w-full"
                 placeholder="Customer company name*"
                 name={'company'}
+                onChange={(e) => {
+                    setFormState({
+                        ...formState,
+                        company: e.target.value
+                    })
+                }}
+                value={formState.company}
             />
         </label>
         <label className="block">
@@ -34,6 +83,12 @@ export const MaterialsForm = () => {
                 className="form-input mt-1 block w-full"
                 name={'name'}
                 placeholder="Product name*"
+                onChange={(e) => {
+                    setFormState({
+                        ...formState,
+                        name: e.target.value
+                    })
+                }}
             />
         </label>
         <label className="block">
@@ -43,22 +98,26 @@ export const MaterialsForm = () => {
                 className="form-input mt-1 block w-full"
                 name={'tags'}
                 placeholder="Add tags here"
+                onChange={(e) => {
+                    setFormState({
+                        ...formState,
+                        tags: e.target.value
+                    })
+                }}
             />
         </label>
         <div className="flex gap-2  min-h-48 mb-8 bg-grayb items-center justify-center  flex-col border-dashed border-2 border-primary">
-
-
-            <div className={`flex flex-col ${filesName === '' ? 'block' : 'hidden' }`}>
+            <div className={`flex flex-col ${filesName?.length === 0 ? 'block' : 'hidden' }`}>
                 <label className={'cursor-pointer self-center'}>
                     <Image src={'/elements.svg'} width={50} height={50} alt="pdf"/>
                     <input
                         type="file"
                         name={'documents'}
-                        className="hidden"
+                        className="opacity-0 fixed"
                         accept={'.pdf,.docx,.txt,.ppt'}
                         onChange={(e:any ) => {
                             setFilesName(
-                                Array.from(e.target.files).map((file: any) => file.name)
+                                Array.from(e.target.files)
                             )
                         }}
                         required
@@ -68,30 +127,48 @@ export const MaterialsForm = () => {
                 <span className={'text-sm text-grayLight'}>Click to upload</span>
             </div>
 
-            { filesName !== '' && <ul
-                className={`list-none max-h-44 p-3 overflow-y-auto my-1 ${filesName === '' ? 'hidden' : 'block'}`}>{filesName.map(
+            { filesName.length > 0 && <ul
+                className={`list-none max-h-44 p-3 overflow-y-auto my-1 w-full ${filesName.length === 0 ? 'hidden' : 'block'}`}>{filesName.map(
                     (name: string, index: number) => {
                         return <li
-                            className={'text-sm bg-darkViolet my-1 p-3'}
-                            key={index}>{name}</li>
+                            className={'text-sm bg-darkViolet my-1 p-3 flex justify-between w-full'}
+                            key={index}>
+                            <Tooltip
+                                content={name.name}
+                                placement={'top'}
+                                className={'truncate'}
+                            >
+
+                                <p className={'truncate w-5/6'}>{name.name}</p>
+                            </Tooltip>
+
+                            <span
+                                onClick={
+                                    () => {
+                                        setFilesName(filesName.filter((item, i) => i !== index))
+                                    }
+                                }
+                            >
+                                <MdCancel
+                                    className={'text-red-500 cursor-pointer'}
+                                    size={20}
+                                />
+                            </span>
+                        </li>
                     }
                 )}</ul>}
 
         </div>
         <legend className={'text-grayLight'}>Upload File (PDF, DOCX, TXT, PPT files up to 10MB)</legend>
-        <SaveButton/>
+        <Button
+            type="submit"
+            className="btn-primary w-full"
+            color={'primary'}
+            isLoading={isLoading}
+            disabled={isLoading}
+        >
+            Upload
+        </Button>
     </form>
 }
 
-const SaveButton = () => {
-    const { pending } = useFormStatus();
-    return <Button
-        type="submit"
-        className="btn-primary w-full"
-        color={'primary'}
-        isLoading={pending}
-        disabled={pending}
-    >
-        Upload
-    </Button>
-}
