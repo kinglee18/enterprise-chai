@@ -20,9 +20,12 @@ export default function MaterialsTable({data}: MaterialsTableProps) {
             name: item.product.name,
             tags: item.product.tags,
             created_at: moment(item.created_at).format('DD-MMM-YYYY hh:mm a'),
-            document: item.file.split('/').pop(),
-            tools: getTools(item.id),
-            rowUrl: `${item.file}`.replace('http://backend', process.env.NEXT_PUBLIC_BACKEND)
+            document: <a
+                href={`${item.file}.replace('http://backend', process.env.NEXT_PUBLIC_BACKEND`}
+                className={'w-full contents'}
+                target={'_blank'}>{item.file.split('/').pop()}
+            </a>,
+            tools: getTools(item.id)
         }
     })
 

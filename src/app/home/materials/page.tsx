@@ -14,12 +14,12 @@ export default async function Materials({searchParams}: any ) {
         <main className="w-full px-9">
             <Modal
                 isOpen={searchParams.action === 'new'}
+                size={'xl'}
                 closeButton={<a href={'/home/materials'}>X</a>}
             >
                 <ModalContent>
                     <ModalHeader className="flex flex-col gap-1">
                         <p className={'text-primarySmall'}>Upload a new document</p>
-                        <p>List of recommended documents</p>
                     </ModalHeader>
                     <ModalBody>
                         <MaterialsForm/>

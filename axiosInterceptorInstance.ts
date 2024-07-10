@@ -1,5 +1,6 @@
 
 import axios from 'axios';
+import {cookies} from "next/headers";
 
 const axiosInterceptorInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BACKEND
@@ -8,9 +9,13 @@ const axiosInterceptorInstance = axios.create({
 axiosInterceptorInstance.interceptors.request.use(
     (config) => {
         // Handle request headers here
+        const token = cookies().get('token');
         console.table(
             config.data
         )
+        if (token && config.url !== '/login' && config.url !== '/register') {
+            config.headers['Authorization'] = `Token ${token.value}`;
+        }
         return config;
     },
     (error) => {
