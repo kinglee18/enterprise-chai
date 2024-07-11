@@ -29,7 +29,9 @@ export default async function Customers({
                     </ModalBody>
                 </ModalContent>
             </Modal>
-            <Header title={'Customers'} subtitle={''}/>
+            <Header
+                title={'Customers'}
+                subtitle={'Manage your customer information here. Add new customers, view and update existing customer details, and keep track of their product interests.'}/>
             <div className="flex justify-end gap-x-3">
                 <a href={'/home/customers?action=new'}>
                     <button className={'bg-primarySmall text-white w-36 h-12'}>New</button>

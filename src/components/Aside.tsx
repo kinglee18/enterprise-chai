@@ -10,7 +10,7 @@ export default function Aside() {
     const currentRoute = usePathname()
     const routes = [
         {route: '/home/csm', icon: <LuRocket/>, name: 'CSM Companion'},
-        {route: '/home/materials', icon: <PiFileText/>, name: 'Materials'},
+        {route: '/home/materials', icon: <PiFileText/>, name: 'Reference Materials'},
         {route: '/home/customers', icon: <FaUserAlt/>, name: 'Customers'}
     ]
     return <aside className="w-48 bg-customGradient p-1">
