@@ -1,3 +1,4 @@
+'use server'
 import axiosInterceptorInstance from "../../axiosInterceptorInstance";
 
 export interface Product {
