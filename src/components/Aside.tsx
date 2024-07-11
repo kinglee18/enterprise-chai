@@ -1,14 +1,17 @@
 'use client';
 import Image from "next/image";
 import { usePathname } from 'next/navigation';
-
+import { FaUserAlt } from "react-icons/fa";
+import { LuRocket } from "react-icons/lu";
+import { PiFileText } from "react-icons/pi";
 
 export default function Aside() {
     //get the current route
     const currentRoute = usePathname()
     const routes = [
-        {route: '/home/materials', icon: 'Materials.svg', name: 'Materials'},
-        {route: '/home/csm', icon: 'Launch.svg', name: 'CSM Companion'}
+        {route: '/home/csm', icon: <LuRocket/>, name: 'CSM Companion'},
+        {route: '/home/materials', icon: <PiFileText/>, name: 'Materials'},
+        {route: '/home/customers', icon: <FaUserAlt/>, name: 'Customers'}
     ]
     return <aside className="w-48 bg-customGradient p-1">
         <a className="flex mt-4 p-x-1.5 justify-center" href={'/home/dashboard'}>
@@ -26,7 +29,9 @@ export default function Aside() {
                     }`}
                     href={route.route}
                     key={index}>
-                    <Image src={`/${route.icon}`} alt={route.name} width={18} height={18}/>
+                    <div>
+                        {route.icon}
+                    </div>
                     {route.name}
                 </a>
             ))}
