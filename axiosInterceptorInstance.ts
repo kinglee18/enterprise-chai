@@ -11,9 +11,9 @@ axiosInterceptorInstance.interceptors.request.use(
         // Handle request headers here
         const token = cookies().get('token');
         console.table(
-            config.data
+            config?.data
         )
-        if (token && config.url !== '/login' && config.url !== '/register') {
+        if (token && config?.url !== '/login' && config?.url !== '/register') {
             config.headers['Authorization'] = `Token ${token.value}`;
         }
         return config;
@@ -27,18 +27,18 @@ axiosInterceptorInstance.interceptors.request.use(
 axiosInterceptorInstance.interceptors.response.use(
     (response) => {
         console.table({
-            data: response.data,
-            url: response.config.url,
-            status: response.status,
+            data: response?.data,
+            url: response?.config?.url,
+            status: response?.status,
         });
         return response;
     },
     (error) => {
         console.table(
             {
-                url: error.config.url,
-                status: error.response.status,
-                data: error.response.data,
+                url: error.config?.url,
+                status: error.response?.status,
+                data: error.response?.data,
             }
         )
         return Promise.reject(error);

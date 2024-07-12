@@ -57,14 +57,16 @@ export const MaterialsForm = () => {
 
     }
 
-    return <form className={'flex flex-col gap-4'} action={onClick} >
+    const disableSaveButton = !formState.company || !filesName.length || isLoading || !formState.name;
+
+    return <form className={'flex flex-col gap-4'}  >
         <label className="block">
-            <span className="text-gray-700">Customer company *</span>
+            <span className="text-gray-700">Company *</span>
             <input
                 required
                 type="text"
                 className="form-input mt-1 block w-full"
-                placeholder="Customer company name*"
+                placeholder="Company name*"
                 name={'company'}
                 onChange={(e) => {
                     setFormState({
@@ -165,7 +167,8 @@ export const MaterialsForm = () => {
             className="btn-primary w-full"
             color={'primary'}
             isLoading={isLoading}
-            disabled={isLoading}
+            isDisabled={disableSaveButton}
+            onClick={onClick}
         >
             Upload
         </Button>
