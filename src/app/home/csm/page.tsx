@@ -29,7 +29,7 @@ export default async function List({searchParams}: any ) {
     ];
 
     const finishedCallsColumns: TableColumn[] = [
-        { key: 'session_number', title: 'Sesssion no' },
+        { key: 'session_number', title: 'Session no' },
         { key: 'conversationIntent', title: 'Conversation Intent' },
         { key: 'customerCompanyName', title: 'Company name' },
         { key: 'created', title: 'Date' },
