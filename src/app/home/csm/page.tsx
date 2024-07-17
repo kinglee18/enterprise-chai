@@ -21,7 +21,7 @@ export default async function List({searchParams}: any ) {
 
 
     const pendingCallsColumns: TableColumn[] = [
-        { key: 'customerCompanyName', title: 'Customer company name' },
+        { key: 'customerCompanyName', title: 'Company name' },
         { key: 'customerPoint', title: 'Customer point of contact' },
         { key: 'conversationIntent', title: 'Conversation Intent' },
         { key: 'created', title: 'Created', width: 'w-1/4' },
@@ -31,7 +31,7 @@ export default async function List({searchParams}: any ) {
     const finishedCallsColumns: TableColumn[] = [
         { key: 'session_number', title: 'Sesssion no' },
         { key: 'conversationIntent', title: 'Conversation Intent' },
-        { key: 'customerCompanyName', title: 'Customer company name' },
+        { key: 'customerCompanyName', title: 'Company name' },
         { key: 'created', title: 'Date' },
     ];
     const getTools = (id: number) => (
@@ -53,7 +53,7 @@ export default async function List({searchParams}: any ) {
     })
     return (
         <div className="w-full px-9">
-            <Header title={'CSM Companion'}/>
+            <Header title={'CSM Companion'} subtitle={'Manage your customer success sessions here. Create new sessions, view active and completed sessions, and relaunch as needed.'}/>
             <div className='flex align-middle gap-x-3'>
                 <a href={`/home/csm?status=pending`}>
                     <button className={`btn-intents  ${isPending ?  'font-bold' : 'text-grayDark1'}`}>

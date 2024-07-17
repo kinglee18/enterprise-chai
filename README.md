@@ -20,6 +20,7 @@ NEXT_PUBLIC_BACKEND=http://localhost
 First, run the development server:
 
 
+
 ```bash
 npm run dev
 ```

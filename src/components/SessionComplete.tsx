@@ -9,7 +9,7 @@ export default function SessionComplete({summaryInfo}) {
                         {summaryInfo.session.session_number}
                     </span>
                     <span>
-                        <span className="text-primarySmall mr-2">Customer company name:</span>
+                        <span className="text-primarySmall mr-2">Company name:</span>
                         {summaryInfo.session.product_company}</span>
                     <span>
                         <span className="text-primarySmall mr-2">Customer point of contact:</span>

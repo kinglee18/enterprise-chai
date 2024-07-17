@@ -51,7 +51,7 @@ export async function authenticate(
     const response = await signInApp(formData.get("email") as string, formData.get("password") as string)
     if (response.token !== null) {
         cookies().set('token', response.token)
-        redirect("/home/materials");
+        redirect("/home/csm");
     }
     return { message: response.message };
 }

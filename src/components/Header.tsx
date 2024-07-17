@@ -7,12 +7,12 @@ interface HeaderProps {
 }
 export default function Header({title, subtitle}: HeaderProps) {
     return (
-        <nav className='w-full  pt-2 pb-2 flex justify-between items-center border-b border-grayDark mb-3'>
-            <div className='w-2/4'>
+        <nav className='w-full  pt-2 pb-2 flex justify-between items-center border-b border-grayDark mb-3 gap-2'>
+            <div className='w-11/12'>
                 <h2>{title}</h2>
-                <p>{subtitle}</p>
+                <p className={'font-montserrat text-grayLight2 text-sm'}>{subtitle}</p>
             </div>
-            <div className='w-2/4 flex justify-end items-center gap-4'>
+            <div className='w-1/4 flex justify-end items-center gap-4'>
                 <div className='relative'>
                     <Image
                         src={'/search.svg'}
