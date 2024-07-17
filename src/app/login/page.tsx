@@ -57,16 +57,6 @@ export default function Login() {
 
                     </div>
                     <LoginButton/>
-                    <div className='w-full flex justify-between  items-center mt-20'>
-                        <button className='btn-login'>
-                            <Image src={'/google.png'} alt='linkedin logo' width={30} height={30}/>
-            Sign in with Google
-                        </button>
-                        <button className='btn-login'>
-                            <Image src={'/linkedin.png'} alt='linkedin logo' width={30} height={30}/>
-            Sign in with Linkedin
-                        </button>
-                    </div>
                     <div className='flex justify-center gap-2 mt-10'>
                         <p>Don’t have an account?  </p>
                         <a  href={'/account/register'} className='text-primarySmall '>Sign Up</a>
