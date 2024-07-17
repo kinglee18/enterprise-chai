@@ -1,7 +1,7 @@
 'use client';
 import Image from "next/image";
 import { usePathname } from 'next/navigation';
-import { FaUserAlt } from "react-icons/fa";
+//import { FaUserAlt } from "react-icons/fa";
 import { LuRocket } from "react-icons/lu";
 import { PiFileText } from "react-icons/pi";
 
@@ -11,7 +11,6 @@ export default function Aside() {
     const routes = [
         {route: '/home/csm', icon: <LuRocket/>, name: 'CSM Companion'},
         {route: '/home/materials', icon: <PiFileText/>, name: 'Reference Materials'},
-        {route: '/home/customers', icon: <FaUserAlt/>, name: 'Customers'}
     ]
     return <aside className="w-48 bg-customGradient p-1">
         <a className="flex mt-4 p-x-1.5 justify-center" href={'/home/dashboard'}>
