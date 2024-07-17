@@ -68,16 +68,6 @@ export default function Register() {
                     </div>
                     <p className={'text-warning'}>{state.message}</p>
                     <SubmitButton checked={checked}/>
-                    <div className='w-full flex justify-between  items-center mt-20'>
-                        <button className='btn-login'>
-                            <Image src={'/google.png'} alt='linkedin logo' width={30} height={30}/>
-            Sign in with Google
-                        </button>
-                        <button className='btn-login'>
-                            <Image src={'/linkedin.png'} alt='linkedin logo' width={30} height={30}/>
-            Sign in with Linkedin
-                        </button>
-                    </div>
                 </div>
             </div>
 
