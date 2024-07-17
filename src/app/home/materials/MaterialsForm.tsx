@@ -6,6 +6,16 @@ import { MdCancel } from "react-icons/md";
 import {Tooltip} from "@nextui-org/tooltip";
 import { useRouter } from 'next/navigation'
 
+export function extractToken(cookieString: string) {
+    const cookies = cookieString.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.indexOf('token=') === 0) {
+            return cookie.substring(6);
+        }
+    }
+    return null;
+}
 
 export const MaterialsForm = () => {
 
@@ -16,16 +26,7 @@ export const MaterialsForm = () => {
         name: '',
         tags: '',
     });
-    function extractToken(cookieString: string) {
-        const cookies = cookieString.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            let cookie = cookies[i].trim();
-            if (cookie.indexOf('token=') === 0) {
-                return cookie.substring(6);
-            }
-        }
-        return null;
-    }
+
 
 
     const [filesName, setFilesName] = React.useState<any[]>([]);
