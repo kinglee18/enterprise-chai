@@ -1,9 +1,8 @@
-import {cookies} from "next/headers";
-import axiosInterceptorInstance from "../../axiosInterceptorInstance";
+'use client'
+import axios from "axios";
 
-export const getSummary: Promise<any> = async (id: string) => {
-    const token = cookies().get('token').value
-    const response = await axiosInterceptorInstance.get( '/summary?companion_session_id=' + id, {
+export const getSummary: Promise<any> = async (id: string, token) => {
+    const response = await axios.get( process.env.NEXT_PUBLIC_BACKEND + '/summary?companion_session_id=' + id, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Token ' + token
