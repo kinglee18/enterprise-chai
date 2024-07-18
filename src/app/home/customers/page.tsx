@@ -23,6 +23,7 @@ export default async function Customers({
                 <ModalContent>
                     <ModalHeader className="flex flex-col gap-1">
                         <p className={'text-primarySmall'}>Add a new Customer</p>
+                        <p className={'text-gray-500 text-sm'}>Fill in the details below to add a new customer to the list.</p>
                     </ModalHeader>
                     <ModalBody>
                         <CustomersForm products={products.products}/>

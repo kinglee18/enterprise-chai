@@ -15,7 +15,7 @@ export const CustomersForm = ({products}) => {
 
     return <form className={'flex flex-col gap-4'} action={formAction}>
         <div className="block">
-            <span className="text-gray-700">Name *</span>
+            <span className="text-gray-700">Customer Name *</span>
             <input
                 required
                 type="text"
@@ -24,7 +24,7 @@ export const CustomersForm = ({products}) => {
             />
         </div>
         <div className="block">
-            <span className="text-gray-700">Point of contact*</span>
+            <span className="text-gray-700">Point of Contact*</span>
             <input
                 required
                 type="text"
@@ -34,7 +34,7 @@ export const CustomersForm = ({products}) => {
             />
         </div>
         <div className="block">
-            <span className="text-gray-700">Customer email *</span>
+            <span className="text-gray-700">Email *</span>
             <input
                 required
                 type="email"
@@ -76,6 +76,6 @@ const SaveButton = () => {
         isLoading={pending}
         disabled={pending}
     >
-        Save
+        Add Customer
     </Button>
 }
