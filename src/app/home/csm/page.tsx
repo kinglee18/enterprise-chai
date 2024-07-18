@@ -33,11 +33,21 @@ export default async function List({searchParams}: any ) {
         { key: 'conversationIntent', title: 'Conversation Intent' },
         { key: 'customerCompanyName', title: 'Company name' },
         { key: 'created', title: 'Date' },
+        { key: 'tools', title:'',width:'w-1/4' }
     ];
     const getTools = (id: number) => (
         <div className="flex items-center justify-end gap-6">
             <Anchor url={`/session/${id}/active`} text={'Launch'}/>
             <DeleteForm id={id}/>
+        </div>
+    )
+    const completedSessionTools = (id: number) => (
+        <div className="flex items-center justify-end gap-6">
+            <a
+                className={'bg-violetLight rounded px-2 py-1 shadow-md cursor-pointer'}
+                href={`/session/${id}/finished`} >
+                Summary
+            </a>
         </div>
     )
     const data: TableRow[] = sessions.sessions.map((session:any) => {
@@ -47,8 +57,7 @@ export default async function List({searchParams}: any ) {
             customerPoint: session['point_of_contact'],
             conversationIntent: session['journey_phase'],
             created: moment(session['created_at']).format('DD-MMM-YYYY hh:mm a'),
-            tools: getTools(session.id),
-            rowUrl: isPending ? null : `/session/${session.id}/finished`
+            tools: isPending ? getTools(session.id) : completedSessionTools(session.id),
         }
     })
     return (
