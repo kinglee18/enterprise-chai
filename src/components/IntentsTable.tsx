@@ -20,11 +20,11 @@ export default function IntentsTable() {
                             alt='search'
                             width={16}
                             height={16}
-                            className='absolute left-3 top-1/2 transform -translate-y-1/2'
+                            className='absolute left-3 top-1/2 transform -translate-y-1/2 hidden'
                         />
                         <input type="search" placeholder='Type here...' className='search-input pl-8  pr-4 mr-3.5'/>
                     </div>
-                    <button>
+                    <button className={'hidden'}>
                         <Image
                             src={'/Settings.png'}
                             alt='search'

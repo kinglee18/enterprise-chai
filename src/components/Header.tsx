@@ -21,10 +21,10 @@ export default function Header({title, subtitle}: HeaderProps) {
                         height={16}
                         className='absolute left-3 top-1/2 transform -translate-y-1/2'
                     />
-                    <input type="search" placeholder='Type here...' className='search-input pl-8  pr-4'/>
+                    <input type="search" placeholder='Type here...' className='hidden search-input pl-8  pr-4'/>
                 </div>
 
-                <div className='flex gap-4 gap-y-0'>
+                <div className='flex gap-4 gap-y-0 hidden'>
                     <div className='flex-col justify-end items-end h-16 pt-2'>
                         <Image
                             src={'/user-01.svg'}

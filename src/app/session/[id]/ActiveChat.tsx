@@ -79,13 +79,13 @@ export default function ActiveChat({tabRecorder, micRecorder, conversation}: Act
                     <h2>{`${conversation?.journey_phase} with ${conversation?.point_of_contact}`}</h2>
                 </div>
                 <Navigation>
-                    <button  className={`block py-4 text-base rounded hover:bg-tertiary hover-text-shadow bg-primary text-white nav-item`}>
+                    <button  className={`hidden block py-4 text-base rounded hover:bg-tertiary hover-text-shadow bg-primary text-white nav-item`}>
             Settings
                     </button>
-                    <button className={`block py-4 text-base rounded hover:bg-tertiary hover-text-shadow bg-primary text-white nav-item`}>
+                    <button className={`hidden block py-4 text-base rounded hover:bg-tertiary hover-text-shadow bg-primary text-white nav-item`}>
             Auto Scroll
                     </button>
-                    <button className={`block py-4 text-base rounded hover:bg-tertiary hover-text-shadow bg-primary text-white nav-item`}>
+                    <button className={`hidden block py-4 text-base rounded hover:bg-tertiary hover-text-shadow bg-primary text-white nav-item`}>
             Pause
                     </button>
                     <button

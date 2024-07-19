@@ -45,7 +45,7 @@ export default async function Materials({searchParams}: any ) {
                 subtitle={'Access a wide range of documents including product docs, KB articles, best practices, presentations, and past conversations. Upload new resources or search through existing ones.'}/>
             <div className="flex justify-end gap-x-3">
                 <a href={'/home/materials?action=template'}>
-                    <button className={'bg-darkViolet700 w-36 h-12'}>
+                    <button className={'bg-darkViolet700 w-36 h-12 hidden'}>
                         Template
                     </button>
                 </a>

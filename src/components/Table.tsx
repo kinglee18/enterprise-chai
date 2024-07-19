@@ -30,9 +30,9 @@ export default function Table({title, columns, data}: TableProps) {
                             height={16}
                             className='absolute left-3 top-1/2 transform -translate-y-1/2'
                         />
-                        <input type="search" placeholder='Type here...' className='search-input pl-8  pr-4 mr-3.5'/>
+                        <input type="search" placeholder='Type here...' className='hidden search-input pl-8  pr-4 mr-3.5'/>
                     </div>
-                    <button>
+                    <button className={'hidden'}>
                         <Image
                             src={'/Settings.png'}
                             alt='search'
