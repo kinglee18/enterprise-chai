@@ -90,7 +90,7 @@ export default function Register({
                 isOpen={true}
                 size={'full'}
                 scrollBehavior={"inside"}
-                closeButton={<a href={'/register'}>X</a>}
+                closeButton={<a href={'/account/register'}>X</a>}
             >
                 <ModalContent>
                     {() => (<>
