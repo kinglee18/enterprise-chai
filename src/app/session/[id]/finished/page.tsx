@@ -2,16 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import {getSummary} from "@/services/summary";
 import SessionWarning from "@/app/session/[id]/finished/SessionWarning";
-import {extractToken} from "@/app/home/materials/MaterialsForm";
 import Loading from "@/app/session/[id]/finished/loading";
 
 export default function Finished({params}) {
-    const token = extractToken(document.cookie)
     const [summaryInfo, setSummaryInfo] = useState(null);
 
     useEffect(() => {
         const fetchSummary = async () => {
-            const data = await getSummary(params.id, token);
+            const data = await getSummary(params.id);
             setSummaryInfo(data[0]);
         };
 
