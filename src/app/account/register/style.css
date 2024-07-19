@@ -1,0 +1,26 @@
+ol {
+    counter-reset: item;
+}
+
+ol > li {
+    display: block;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+ol > li:before {
+    content: counters(item, ".") ". ";
+    counter-increment: item;
+}
+
+ol > li > p {
+    margin-left: 1.2rem;
+}
+
+div > ol > li  {
+    margin-top: 2rem;
+}
+
+div > ol > li > span {
+    font-weight: bold;
+}
