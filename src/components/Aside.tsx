@@ -13,7 +13,7 @@ export default function Aside() {
         {route: '/home/materials', icon: <PiFileText/>, name: 'Reference Materials'},
         {route: '/home/customers', icon: <FaUserAlt/>, name: 'Customers'}
     ]
-    return <aside className="w-48 bg-customGradient p-1">
+    return <aside className="w-64 bg-customGradient p-1">
         <a className="flex mt-4 p-x-1.5 justify-center" href={'/home/dashboard'}>
             <span className={'text-primarySmall text-base font-medium'}>Enterprise</span>
             <Image src="/cup_logo.svg" alt="Logo" width={26} height={16} className={'mx-1'}/>
@@ -21,7 +21,7 @@ export default function Aside() {
             <span className={'text-greenLogo text-base font-bold'}>AI</span>
         </a>
 
-        <div className="flex flex-col mt-16">
+        <div className="flex flex-col mt-16 px-3">
             {routes.map((route, index) => (
                 <a
                     className={`btn-dashboard ${
