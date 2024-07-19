@@ -49,7 +49,7 @@ export default function Login() {
                             />
                         </label>
                         <div  className='flex justify-end mt-1'>
-                            <small className='mr-0 text-primarySmall'>forgot password</small>
+                            <small className='hidden mr-0 text-primarySmall'>forgot password</small>
                         </div>
                     </div>
                     <div className="flex gap-2 pt-4 pb-4 mb-8">
