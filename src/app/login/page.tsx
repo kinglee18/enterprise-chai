@@ -11,6 +11,7 @@ const initialState : any = {
 
 export default function Login() {
     const [state, formAction] = useFormState(authenticate, initialState);
+    const [checked, setChecked] = React.useState(true);
     return (
         <form className='bg-white rounded-lg h-screen flex xl:pl-36 lg:pl-24' action={formAction}>
 
@@ -52,11 +53,23 @@ export default function Login() {
                             <small className='hidden mr-0 text-primarySmall'>forgot password</small>
                         </div>
                     </div>
-                    <div className="flex gap-2 pt-4 pb-4 mb-8">
-                        <p className={'text-warning'}>{state.message}</p>
 
+                    <div className="flex gap-2 my-4">
+                        <input
+                            type="checkbox"
+                            className='checkbox-login'
+                            checked={checked}
+                            onChange={(event) => {
+                                setChecked(event.target.checked)
+                            }}
+                        />
+                        I agree to EnterpriseCHAI’s
+                        <a href={'/account/register?section=terms'} className={'text-primarySmall'}>Terms and Conditions</a>
                     </div>
-                    <LoginButton/>
+                    <p className={'text-warning'}>{state.message}</p>
+                    <LoginButton
+                        disabled={!checked}
+                    />
                     <div className='flex justify-center gap-2 mt-10'>
                         <p>Don’t have an account?  </p>
                         <a  href={'/account/register'} className='text-primarySmall '>Sign Up</a>
@@ -72,13 +85,13 @@ export default function Login() {
         </form>
     )
 }
-const LoginButton = () => {
+const LoginButton = ({disabled}) => {
     const { pending } = useFormStatus();
     return <Button
         type="submit"
         className="btn-primary w-full rounded"
         isLoading={pending}
-        disabled={pending}
+        isDisabled={pending || disabled}
         color="primary">
         Log in
     </Button>
