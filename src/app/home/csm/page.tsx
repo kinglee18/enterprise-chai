@@ -97,7 +97,7 @@ export default async function List({searchParams}: any ) {
                 </div>
 
             </div>
-            <AppTabs tabContent={tabContent}/>
+            <AppTabs tabContent={tabContent} isNew={searchParams.action === 'new'}/>
             <Modal
                 isOpen={searchParams.action === 'new'}
                 size={'xl'}

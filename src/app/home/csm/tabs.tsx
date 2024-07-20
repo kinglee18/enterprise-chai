@@ -13,10 +13,14 @@ export interface AppTabsProps {
 }
 
 
-export default function AppTabs({tabContent}: AppTabsProps) {
+export default function AppTabs({tabContent, isNew}: AppTabsProps) {
     const router = useRouter();
 
     const handleTabChange = (key: React.Key) => {
+        console.log(isNew);
+        if (isNew) {
+            return;
+        }
         const selectedTab = tabContent[key as number];
         router.push(selectedTab.url);
     };
@@ -25,7 +29,6 @@ export default function AppTabs({tabContent}: AppTabsProps) {
             <CardBody>
                 <Tabs
                     onSelectionChange={handleTabChange}
-                    activeKey={router.pathname}
                 >
                     {tabContent.map((tab, index) => (
                         <Tab key={index} title={tab.title}>
