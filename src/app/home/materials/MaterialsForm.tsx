@@ -22,7 +22,6 @@ export const MaterialsForm = () => {
     const router = useRouter();
     const [isLoading, setIsLoading] = React.useState(false);
     const [formState, setFormState] = React.useState({
-        company: '',
         name: '',
         tags: '',
     });
@@ -34,7 +33,7 @@ export const MaterialsForm = () => {
         const formData = new FormData();
         const token = extractToken(document.cookie)
 
-        formData.append('company', formState.company);
+        formData.append('company', 'formState.company');
         formData.append('name', formState.name);
         formData.append('tags', formState.tags);
         for (let i = 0; i < filesName.length; i++) {
@@ -58,26 +57,9 @@ export const MaterialsForm = () => {
 
     }
 
-    const disableSaveButton = !formState.company || !filesName.length || isLoading || !formState.name;
+    const disableSaveButton = !filesName.length || isLoading || !formState.name;
 
     return <form className={'flex flex-col gap-4'}  >
-        <label className="block">
-            <span className="text-gray-700">Company *</span>
-            <input
-                required
-                type="text"
-                className="form-input mt-1 block w-full"
-                placeholder="Company name*"
-                name={'company'}
-                onChange={(e) => {
-                    setFormState({
-                        ...formState,
-                        company: e.target.value
-                    })
-                }}
-                value={formState.company}
-            />
-        </label>
         <label className="block">
             <span className="text-gray-700">Product name</span>
             <input
