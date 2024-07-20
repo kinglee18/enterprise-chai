@@ -70,8 +70,8 @@ export default function Register({
                                     setChecked(event.target.checked)
                                 }}
                             />
-                        I agree to EnterpriseCHAI’
-                            <a href={'/account/register?section=terms'} className={'text-primarySmall'}>Terms of Service</a>
+                        I agree to EnterpriseCHAI’s
+                            <a href={'/account/register?section=terms'} className={'text-primarySmall'}>Terms and Conditions</a>
                         </div>
                         <p className={'text-warning'}>{state.message}</p>
                         <SubmitButton checked={checked}/>
