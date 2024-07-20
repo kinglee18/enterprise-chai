@@ -9,6 +9,7 @@ import {getJourneyPhases, getSessions} from "@/services/sessions";
 import {DeleteForm} from "@/app/home/csm/DeleteSessionForm";
 import {getProducts} from "@/services/products";
 import Anchor from "@/app/home/csm/anchor";
+import AppTabs, {AppTabsProps} from "@/app/home/csm/tabs";
 
 export default async function List({searchParams}: any ) {
     const isPending = searchParams.status === 'pending' || !searchParams.status;
@@ -21,7 +22,7 @@ export default async function List({searchParams}: any ) {
 
 
     const pendingCallsColumns: TableColumn[] = [
-        { key: 'customerCompanyName', title: 'Company name' },
+        { key: 'customer', title: 'Customer' },
         { key: 'customerPoint', title: 'Customer point of contact' },
         { key: 'conversationIntent', title: 'Conversation Intent' },
         { key: 'created', title: 'Created', width: 'w-1/4' },
@@ -31,7 +32,7 @@ export default async function List({searchParams}: any ) {
     const finishedCallsColumns: TableColumn[] = [
         { key: 'session_number', title: 'Session no' },
         { key: 'conversationIntent', title: 'Conversation Intent' },
-        { key: 'customerCompanyName', title: 'Company name' },
+        { key: 'customer', title: 'Customer' },
         { key: 'created', title: 'Date' },
         { key: 'tools', title:'',width:'w-1/4' }
     ];
@@ -53,41 +54,50 @@ export default async function List({searchParams}: any ) {
     const data: TableRow[] = sessions.sessions.map((session:any) => {
         return {
             ...session,
-            customerCompanyName: session['product_company'],
+            customer: session['customer_email'],
             customerPoint: session['point_of_contact'],
             conversationIntent: session['journey_phase'],
             created: moment(session['created_at']).format('DD-MMM-YYYY hh:mm a'),
             tools: isPending ? getTools(session.id) : completedSessionTools(session.id),
         }
     })
-    return (
-        <div className="w-full px-9">
-            <Header title={'CSM Companion'} subtitle={'Manage your customer success sessions here. Create new sessions, view active and completed sessions, and relaunch as needed.'}/>
-            <div className='flex align-middle gap-x-3'>
-                <a href={`/home/csm?status=pending`}>
-                    <button className={`btn-intents  ${isPending ?  'font-bold' : 'text-grayDark1'}`}>
-                        Created sessions
-                    </button>
-                </a>
-                <a href={`/home/csm?status=completed`}>
-                    <button className={`btn-intents  ${!isPending ?  'font-bold' : 'text-grayDark1'}`}>Completed sessions</button>
-                </a>
-            </div>
-            <div className="flex justify-end gap-x-3">
-                <button className="btn-settings">Settings</button>
-
-                <a href="/home/csm?action=new">
-                    <button className="btn-feedback">
-                        Create session
-                    </button>
-                </a>
-
-            </div>
-            <Table
+    const tabContent: AppTabsProps = [
+        {
+            tabContent: <Table
+                key={1}
                 title={tableTitle}
                 columns={isPending ? pendingCallsColumns : finishedCallsColumns}
                 data={data}
-            />
+            />,
+            title: 'Active sessions',
+            url: '/home/csm?status=pending'
+        },
+        {
+            tabContent: <Table
+                key={2}
+                title={tableTitle}
+                columns={isPending ? pendingCallsColumns : finishedCallsColumns}
+                data={data}
+            />,
+            title: 'Completed sessions',
+            url: '/home/csm?status=completed'
+        }
+    ]
+    return (
+        <div className="w-full px-9">
+            <Header title={'CSM Companion'} subtitle={'Manage your customer success sessions here. Create new sessions, view active and completed sessions, and relaunch as needed.'}/>
+            <div className={'justify-center my-5'}>
+
+                <div className="flex gap-x-3">
+                    <a href="/home/csm?action=new">
+                        <button className="btn-feedback">
+                            Create session
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+            <AppTabs tabContent={tabContent} isNew={searchParams.action === 'new'}/>
             <Modal
                 isOpen={searchParams.action === 'new'}
                 size={'xl'}

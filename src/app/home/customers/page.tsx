@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import CustomersTable from "@/app/home/customers/CustomersTable";
 import React from "react";
 import {getProducts} from "@/services/products";
+import {CardBody, Card} from "@nextui-org/card";
 
 export default async function Customers({
     searchParams
@@ -33,13 +34,17 @@ export default async function Customers({
             <Header
                 title={'Customers'}
                 subtitle={'Manage your customer information here. Add new customers, view and update existing customer details, and keep track of their product interests.'}/>
-            <div className="flex justify-end gap-x-3">
+            <div className="flex  gap-x-3 my-5">
                 <a href={'/home/customers?action=new'}>
-                    <button className={'bg-primarySmall text-white w-36 h-12'}>New</button>
+                    <button className={'bg-primarySmall text-white w-36 h-12 rounded '}>New</button>
                 </a>
             </div>
             <div>
-                <CustomersTable data={customers}/>
+                <Card>
+                    <CardBody>
+                        <CustomersTable data={customers}/>
+                    </CardBody>
+                </Card>
             </div>
         </main>
     )

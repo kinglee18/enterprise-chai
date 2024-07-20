@@ -83,20 +83,20 @@ const SaveButtons = () => {
     const {pending} = useFormStatus();
     if (pending) return <Button
         isLoading={true}
-        className=" text-white btn-goback w-[130px] bg-primarySmall">
+        className=" text-white btn-goback rounded w-[130px] bg-primarySmall">
         Saving...
     </Button>
     return <>
 
         <Button
             type="submit"
-            className=" text-white btn-goback w-[130px] bg-primarySmall"
+            className=" text-white btn-goback rounded w-[130px] bg-primarySmall"
             name={'launch'}>
             Launch
         </Button>
         <Button
             type="submit"
-            className="btn-goback w-[130px] bg-darkViolet700"
+            className="btn-goback rounded w-[130px] bg-darkViolet700"
             name={'save'}>
             Save for later
         </Button>

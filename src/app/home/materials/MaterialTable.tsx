@@ -12,11 +12,9 @@ export default function MaterialsTable({data}: MaterialsTableProps) {
             <DeleteMaterialForm id={id}/>
         </div>
     )
-    console.log(data)
     const _data = data.map((item) => {
 
         return {
-            company: item.product.company,
             name: item.product.name,
             tags: item.product.tags,
             created_at: moment(item.created_at).format('DD-MMM-YYYY hh:mm a'),
@@ -33,7 +31,6 @@ export default function MaterialsTable({data}: MaterialsTableProps) {
     return (<Table
         title={'Recent Documents'}
         columns={[
-            {title: 'Company', key: 'company', width: 'w-[50p]'},
             {title: 'Name', key: 'name', width: 'w-[50p]'},
             {title: 'Tags', key: 'tags', width: 'w-[50p]'},
             {title: 'Document', key: 'document', width: 'w-[50p]'},

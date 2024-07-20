@@ -71,7 +71,7 @@ const SaveButton = () => {
     const { pending } = useFormStatus();
     return <Button
         type="submit"
-        className="btn-primary w-full"
+        className="btn-primary w-full rounded"
         color={'primary'}
         isLoading={pending}
         disabled={pending}

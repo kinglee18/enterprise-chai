@@ -12,8 +12,8 @@ export default function TabAudio({recorder, setActiveSession, handleTabAudio}: T
         setActiveSession(true);
     }
     return (
-        <div className="w-[560px] h-[180px] bg-grayLight rounded-lg">
-            <div className="h-12 bg-grayPlate rounded-t-lg flex items-center justify-between gap-4 p-4">
+        <div className="w-[560px] h-[180px] bg-primaryBG rounded-lg">
+            <div className="h-12 bg-primarySmall rounded-t-lg flex items-center justify-between gap-4 p-4">
                 <div className="flex items-center gap-4">
                     <Image
                         src={'/monitor-02.png'}
@@ -23,22 +23,10 @@ export default function TabAudio({recorder, setActiveSession, handleTabAudio}: T
                     />
                     <span className="text-white">Browser Tab Audio</span>
                 </div>
-                <div>
-                    {recorder !== null ? <Image
-                        src={'/check-circle.png'}
-                        alt='check-circle'
-                        width={24}
-                        height={24}
-                    /> : <Image
-                        src={'/x-circle.png'}
-                        alt='x circle'
-                        width={24}
-                        height={24}
-                    />}
-                </div>
+
             </div>
             <div className='flex flex-col  justify-center items-center' onClick={handleTabAudio}>
-                <div className={'p-3 bg-white w-11/12 my-3 text-viewPlaceholder cursor-pointer'}>{recorder !== null ? 'Recording tab' : 'no tab selected'}</div>
+                <div className={'p-3  w-11/12 my-3 text-viewPlaceholder cursor-pointer'}></div>
                 <button className='btn-primary' >Configure</button>
             </div>
             <div className='mt-16 flex justify-end'>
