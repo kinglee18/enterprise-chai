@@ -5,6 +5,7 @@ import {MaterialsForm} from "@/app/home/materials/MaterialsForm";
 import MaterialsTable from "@/app/home/materials/MaterialTable";
 import {getMaterials, getTemplates} from "@/services/materials";
 import TemplatesTable from "@/app/home/materials/TemplatesTable";
+import { Card, CardBody} from "@nextui-org/react";
 
 
 export default async function Materials({searchParams}: any ) {
@@ -43,18 +44,23 @@ export default async function Materials({searchParams}: any ) {
             <Header
                 title={'Reference Materials'}
                 subtitle={'Access a wide range of documents including product docs, KB articles, best practices, presentations, and past conversations. Upload new resources or search through existing ones.'}/>
-            <div className="flex justify-end gap-x-3">
+            <div className="flex   my-5">
                 <a href={'/home/materials?action=template'}>
                     <button className={'bg-darkViolet700 w-36 h-12 hidden'}>
                         Template
                     </button>
                 </a>
                 <a href={'/home/materials?action=new'}>
-                    <button className={'bg-primarySmall text-white w-36 h-12'}>New</button>
+                    <button className={'bg-primarySmall text-white w-36 rounded h-12'}>New</button>
                 </a>
             </div>
             <div>
-                <MaterialsTable data={data.materials}/>
+                <Card>
+                    <CardBody>
+                        <MaterialsTable data={data.materials}/>
+
+                    </CardBody>
+                </Card>
             </div>
         </main>
     )
