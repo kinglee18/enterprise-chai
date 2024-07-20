@@ -2,7 +2,7 @@
 export default function SessionComplete({summaryInfo}) {
     return (
         <div className="flex-col w-full">
-            <main className="px-8  gap-y-8 grid bg-darkViolet border-2 pt-3.5 rounded-lg shadow-violetShadow">
+            <main className="px-8  gap-y-8 grid bg-darkViolet border-2 pt-3.5 rounded-lg shadow-violetShadow h-96">
                 <div className="flex justify-between items-center">
                     <span>
                         <span className="text-primarySmall text-medium mr-2">Session No:</span>
@@ -26,20 +26,6 @@ export default function SessionComplete({summaryInfo}) {
                             ))
                         }
                     </p>
-                </div>
-                <div>
-                    <h5 className="text-lg text-primarySmall font-bold">Areas of Improvement:</h5>
-                    <ul className="list-disc px-8 pt-4">
-                        {
-                            summaryInfo.improvement_areas
-                        }
-                    </ul>
-                </div>
-                <div>
-                    <h5 className="text-lg text-primarySmall font-bold">Overall Session Score:
-                        <span className="text-greenDark pl-1">{summaryInfo.score} out of 10</span>
-                    </h5>
-                    <p className="pt-4 pb-10">{summaryInfo.score_breakdown}</p>
                 </div>
             </main>
         </div>
