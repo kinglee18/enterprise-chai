@@ -72,7 +72,7 @@ export default function AudioConfig({conversation}) {
     }
 
     return (
-        <main className="w-full h-[1040px] flex flex-col items-center justify-center ">
+        <main className="w-full h-[1040px] flex flex-col items-center mt-[78px] ">
             <div>
                 <div className={'text-primarySmall text-xl flex ml-auto'}>
                     <p>
@@ -112,21 +112,9 @@ export default function AudioConfig({conversation}) {
                                     width={24}
                                     height={24}
                                 />
-                                <span className="text-white">Computer audio</span>
+                                <span className="text-white">Computer Audio</span>
                             </div>
-                            <div>
-                                {selectedDeviceId.length > 0 ? <Image
-                                    src={'/check-circle.png'}
-                                    alt='check-circle'
-                                    width={24}
-                                    height={24}
-                                /> : <Image
-                                    src={'/x-circle.png'}
-                                    alt='x circle'
-                                    width={24}
-                                    height={24}
-                                />}
-                            </div>
+
                         </div>
 
                         <div className="pt-10 p-5">
