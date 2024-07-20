@@ -116,7 +116,7 @@ function SubmitButton({
     return (
         <Button
             type="submit"
-            className={'w-full'}
+            className={'w-full rounded'}
             aria-disabled={pending}
             isLoading={pending}
             isDisabled={!checked}

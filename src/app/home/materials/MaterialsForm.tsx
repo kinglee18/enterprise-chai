@@ -147,7 +147,7 @@ export const MaterialsForm = () => {
         <legend className={'text-grayLight'}>Upload File (PDF, DOCX, TXT, PPT files up to 10MB)</legend>
         <Button
             type="submit"
-            className="btn-primary w-full"
+            className="btn-primary w-full rounded"
             color={'primary'}
             isLoading={isLoading}
             isDisabled={disableSaveButton}
