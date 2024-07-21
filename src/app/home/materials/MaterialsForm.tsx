@@ -5,6 +5,7 @@ import {Button} from "@nextui-org/react";
 import { MdCancel } from "react-icons/md";
 import {Tooltip} from "@nextui-org/tooltip";
 import { useRouter } from 'next/navigation'
+import {TagInput} from "@/app/home/materials/TabInput";
 
 export function extractToken(cookieString: string) {
     const cookies = cookieString.split(';');
@@ -23,7 +24,7 @@ export const MaterialsForm = () => {
     const [isLoading, setIsLoading] = React.useState(false);
     const [formState, setFormState] = React.useState({
         name: '',
-        tags: '',
+        tags: [],
     });
 
 
@@ -35,7 +36,7 @@ export const MaterialsForm = () => {
 
         formData.append('company', 'formState.company');
         formData.append('name', formState.name);
-        formData.append('tags', formState.tags);
+        formData.append('tags', formState.tags.join(' '));
         for (let i = 0; i < filesName.length; i++) {
             formData.append('documents', filesName[i]);
         }
@@ -78,7 +79,7 @@ export const MaterialsForm = () => {
         </label>
         <label className="block">
             <span className="text-gray-700">Add tags</span>
-            <input
+            {/*            <input
                 type="text"
                 className="form-input mt-1 block w-full"
                 name={'tags'}
@@ -89,6 +90,14 @@ export const MaterialsForm = () => {
                         tags: e.target.value
                     })
                 }}
+            />*/}
+            <TagInput setTags={(e) => {
+                setFormState({
+                    ...formState,
+                    tags: e
+                })
+            }}
+            tags = {formState.tags}
             />
         </label>
         <div className="flex gap-2  min-h-48 mb-8 bg-grayb items-center justify-center  flex-col border-dashed border-2 border-primary">
