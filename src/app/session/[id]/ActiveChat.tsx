@@ -9,7 +9,7 @@ import ModalComplete from "@/components/ModalComplete";
 import {handleStartCapture} from "@/app/session/[id]/sockets";
 import {Conversation} from "@/services/csm";
 import {useParams} from "next/navigation";
-import {Modal, ModalBody, ModalContent} from "@nextui-org/react";
+import {Modal, ModalContent} from "@nextui-org/react";
 
 interface ActiveChatProps {
     tabRecorder: MediaRecorder;
@@ -66,9 +66,7 @@ export default function ActiveChat({tabRecorder, micRecorder, conversation}: Act
                   className={''}
               >
                   <ModalContent>
-                      <ModalBody>
-                          <ModalComplete conversationId={conversationId} onClose={setCompleteSessionAlert}/>
-                      </ModalBody>
+                      <ModalComplete conversationId={conversationId} onClose={setCompleteSessionAlert}/>
                   </ModalContent>
               </Modal> }
             <div className="w-full ">
@@ -98,7 +96,7 @@ export default function ActiveChat({tabRecorder, micRecorder, conversation}: Act
                 </Navigation>
             </div>
             <div className='w-full '>
-                <Tags productName={conversation?.product}/>
+                <Tags/>
             </div>
             <div className='w-full h-4 flex gap-10'>
                 <AssistantLayout messages={assistantMessages} />

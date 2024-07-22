@@ -9,7 +9,7 @@ export default function Congratulations() {
                 <span className="text-2xl text-primarySmall">on a successful conversation!</span>
             </div>
             <div className="flex justify-center">
-                <p className="text-base text-primarySmall pt-3">Your call summary can also be found at CSM Companion Tab</p>
+                <p className="text-base text-primarySmall pt-3 mb-3">Your call summary can also be found at CSM Companion Tab</p>
             </div>
         </div>
     )

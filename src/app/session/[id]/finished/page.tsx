@@ -1,37 +1,23 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import { getSummary } from "@/services/summary";
+import {getSummary, getTranscript} from "@/services/summary";
 import SessionWarning from "@/app/session/[id]/finished/SessionWarning";
 import Loading from "@/app/session/[id]/finished/loading";
 
 export default function Finished({params}) {
     const [summaryInfo, setSummaryInfo] = useState(null);
-    const [error, setError] = useState(null);
+    const [transcript, setTranscript] = useState(null);
 
     useEffect(() => {
         const fetchSummary = async () => {
-            try {
-                const data = await getSummary(params.id);
-                if (typeof data === 'string' && data.startsWith('Timeout:')) {
-                    setError(data);
-                } else {
-                    setSummaryInfo(data[0]);
-                }
-            } catch (err) {
-                setError('An error occurred while fetching the summary.');
-            }
+            const data = await getSummary(params.id);
+            const transcript = await  getTranscript(params.id);
+            setTranscript(transcript);
+            setSummaryInfo(data[0]);
         };
 
         fetchSummary();
     }, [params.id]);
-
-    if (error) {
-        return (
-            <main className="w-full px-9">
-                <p>Error: {error}</p>
-            </main>
-        );
-    }
 
     if (!summaryInfo) {
         return <Loading/>;
@@ -39,7 +25,7 @@ export default function Finished({params}) {
 
     return (
         <main className="w-full px-9">
-            <SessionWarning summaryInfo={summaryInfo}/>
+            <SessionWarning summaryInfo={summaryInfo} transcript={transcript} id={params.id}/>
         </main>
     );
 }
