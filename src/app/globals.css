@@ -40,9 +40,6 @@ body {
   .btn-settings {
     @apply w-[160px] h-12 py-2 px-4 bg-darkViolet700 text-black rounded
   }
-  .btn-session {
-    @apply w-[160px] h-12 py-2 px-4 bg-violetLight text-black rounded
-  }
   .btn-feedback {
     @apply w-[160px] h-12 py-2 px-4 bg-primarySmall text-white font-medium rounded
   }

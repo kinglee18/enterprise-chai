@@ -3,7 +3,7 @@ import iconTime from "../../public/Icon.svg"
 import iconGift from "../../public/Icon2.svg"
 
 
-export default function Tags({productName}) {
+export default function Tags() {
     return (
         <div className="h-10 bg-white flex justify-start align-center items-center  mb-4  mx-auto gap-4 ">
             <Image
@@ -23,9 +23,6 @@ export default function Tags({productName}) {
             />
             <span className="text-gray-500 font-light">
         27 min
-            </span>
-            <span className="text-gray-500 font-light">
-                {productName}
             </span>
         </div>
     )
