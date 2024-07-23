@@ -74,7 +74,7 @@ export default function ActiveChat({tabRecorder, micRecorder, conversation}: Act
             </div>
             <div className="w-full h-12  mt-4 mx-auto flex justify-between align-center items-center">
                 <div className="w-full">
-                    <h2>{`${conversation?.journey_phase} with ${conversation?.point_of_contact}`}</h2>
+                    <h2>{`${conversation?.journey_phase} with ${conversation?.customer.name}`}</h2>
                 </div>
                 <Navigation>
                     <button  className={`hidden block py-4 text-base rounded hover:bg-tertiary hover-text-shadow bg-primary text-white nav-item`}>
