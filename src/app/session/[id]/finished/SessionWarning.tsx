@@ -67,7 +67,9 @@ const MessageComponent = ({ data , summaryInfo}) => {
         <div className="m-4 flex gap-5 justify-center	">
             <div className={'w-5/6'}>
                 {data.map((message, index) => (
-                    <div className={`flex ${message.is_user ? 'justify-start': 'justify-end'} mb-4`}>
+                    <div className={`flex ${message.is_user ? 'justify-start': 'justify-end'} mb-4`} key={
+                        index + "chat-"
+                    }>
                         <div key={index} className=" max-h-full	 rounded-xl shadow-md  gap-4  w-5/6	">
                             <div className="p-4 bg-white">
                                 <div className="flex items-center">
