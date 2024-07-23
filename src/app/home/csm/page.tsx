@@ -10,12 +10,14 @@ import {DeleteForm} from "@/app/home/csm/DeleteSessionForm";
 import {getProducts} from "@/services/products";
 import Anchor from "@/app/home/csm/anchor";
 import AppTabs, {AppTabsProps} from "@/app/home/csm/tabs";
+import {getCustomers} from "@/services/customers";
 
 export default async function List({searchParams}: any ) {
     const isPending = searchParams.status === 'pending' || !searchParams.status;
     const phases = await getJourneyPhases()
     const sessions = await getSessions(isPending)
     const products = await getProducts();
+    const customers = await getCustomers();
     const tableTitle = isPending ? "Active created sessions" : "Call Summary";
 
 
@@ -23,7 +25,7 @@ export default async function List({searchParams}: any ) {
 
     const pendingCallsColumns: TableColumn[] = [
         { key: 'customer', title: 'Customer' },
-        { key: 'customerPoint', title: 'Customer point of contact' },
+        { key: 'point_of_contact', title: 'Customer point of contact' },
         { key: 'conversationIntent', title: 'Conversation Intent' },
         { key: 'created', title: 'Created', width: 'w-1/4' },
         { key: 'tools', title:'',width:'w-1/4' },
@@ -54,8 +56,8 @@ export default async function List({searchParams}: any ) {
     const data: TableRow[] = sessions.sessions.map((session:any) => {
         return {
             ...session,
-            customer: session['customer_email'],
-            customerPoint: session['point_of_contact'],
+            customer: session['customer'].name,
+            point_of_contact: session['customer']['point_of_contact'],
             conversationIntent: session['journey_phase'],
             created: moment(session['created_at']).format('DD-MMM-YYYY hh:mm a'),
             tools: isPending ? getTools(session.id) : completedSessionTools(session.id),
@@ -108,7 +110,7 @@ export default async function List({searchParams}: any ) {
                         <p className={'text-primarySmall'}>Create new session</p>
                     </ModalHeader>
                     <ModalBody>
-                        <CSMForm phases={phases.phases} products={products.products}/>
+                        <CSMForm phases={phases.phases} products={products.products} customers={customers}/>
                     </ModalBody>
                 </ModalContent>
             </Modal>
