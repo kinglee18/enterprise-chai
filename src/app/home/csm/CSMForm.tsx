@@ -17,7 +17,7 @@ interface CSMFormProps {
     phases: Phase[];
     products: any[];
 }
-export const CSMForm = ({phases, products}: CSMFormProps) => {
+export const CSMForm = ({phases, products, customers}: CSMFormProps) => {
 
     // eslint-disable-next-line no-unused-vars
     const [state, formAction] = useFormState(saveSession, initialState);
@@ -36,24 +36,14 @@ export const CSMForm = ({phases, products}: CSMFormProps) => {
             </select>
         </div>
         <div className="block">
-            <span className="text-gray-700">Customer point of contact *</span>
-            <input
-                required
-                type="text"
-                className="form-input mt-1 block w-full"
-                name={'point_of_contact'}
-                placeholder="customer point of contact name"
-            />
-        </div>
-        <div className="block">
-            <span className="text-gray-700">Customer email *</span>
-            <input
-                required
-                type="email"
-                className="form-input mt-1 block w-full"
-                name={'customer_email'}
-                placeholder="customer email"
-            />
+            <span className="text-gray-700">Customer *</span>
+            <select required className="p-2 h-12 border rounded flex items-center w-full" name={'customer'}>
+                {
+                    customers.map((customer) => {
+                        return <option key={customer.id} value={customer.id}>{customer.name}</option>
+                    })
+                }
+            </select>
         </div>
         <div className="block">
             <span className="text-gray-700">Product*</span>
