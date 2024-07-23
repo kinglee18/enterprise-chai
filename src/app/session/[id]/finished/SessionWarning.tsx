@@ -3,6 +3,7 @@ import Congratulations from "@/components/Congratulations"
 import {Tab, Tabs} from "@nextui-org/tabs";
 import {CardBody} from "@nextui-org/react";
 import {Card} from "@nextui-org/card";
+import {useMarkdownProcessor} from "@/hooks/markdown";
 
 export default function SessionWarning({summaryInfo, transcript}: any ) {
     const summaryTab = <p>
@@ -38,7 +39,7 @@ export default function SessionWarning({summaryInfo, transcript}: any ) {
                                         <Tab
                                             title={'Transcript'}
                                         >
-                                            <MessageComponent data={transcript}/>
+                                            <MessageComponent data={transcript} summaryInfo={summaryInfo}/>
                                         </Tab>
 
                                     </Tabs>
@@ -61,33 +62,50 @@ export default function SessionWarning({summaryInfo, transcript}: any ) {
 
 
 
-const MessageComponent = ({ data }) => {
+const MessageComponent = ({ data , summaryInfo}) => {
     return (
-        <div className="max-w-md mx-auto md:max-w-2xl m-4 ">
-            {data.map((message, index) => (
-                <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden mb-4">
-                    <div className="p-8">
-                        <div className="flex items-center">
-                            <p className="text-sm font-semibold text-gray-600">{message.name}</p>
-                        </div>
-                        <div className="mt-2">
-                            <p className="text-gray-800">{message.message}</p>
-                        </div>
-                        <div className="mt-4">
-                            <p className="text-xs text-gray-500">
-                                {new Date(message.created_at).toLocaleString()}
-                            </p>
-                        </div>
-                        {message.response_feedback !== null && (
-                            <div className="mt-2">
-                                <p className="text-sm text-gray-600">
-                                    Feedback: {message.response_feedback}
-                                </p>
+        <div className="m-4 flex gap-5 justify-center	">
+            <div className={'w-5/6'}>
+                {data.map((message, index) => (
+                    <div className={`flex ${message.is_user ? 'justify-start': 'justify-end'} mb-4`} key={
+                        index + "chat-"
+                    }>
+                        <div key={index} className=" max-h-full	 rounded-xl shadow-md  gap-4  w-5/6	">
+                            <div className="p-4 bg-white">
+                                <div className="flex items-center">
+                                    <p className="text-sm font-semibold text-gray-600">{message.name || summaryInfo.session.customer.name}</p>
+                                </div>
+                                <div className="mt-2">
+                                    <p className="text-gray-800">{message.message}</p>
+                                </div>
+                                <div className="mt-4">
+                                    <p className="text-xs text-gray-500">
+                                        {new Date(message.created_at).toLocaleString()}
+                                    </p>
+                                </div>
                             </div>
-                        )}
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
+            <div className={'overflow-auto max-h-full'}>
+                {data.filter(_data => _data.response_feedback !== null).map((message, index) => (
+                    <div key={index} className=" rounded-xl shadow-md overflow-hidden mb-4 ">
+                        <div className="p-4 bg-white">
+                            {message.response_feedback !== null && (
+                                <p className="text-sm text-gray-600">
+                                    Feedback: <Message message={message.response_feedback.rag_response}/>
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
+
+const Message = ({ message }) => {
+    const content = useMarkdownProcessor(message);
+    return <>{content}</>
+}
