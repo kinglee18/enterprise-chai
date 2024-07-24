@@ -61,44 +61,43 @@ export default function SessionWarning({summaryInfo, transcript}: any ) {
 }
 
 
-
 const MessageComponent = ({ data , summaryInfo}) => {
     return (
         <div className="m-4 flex gap-5 justify-center	">
-            <div className={'w-5/6'}>
+            <div className={''}>
                 {data.map((message, index) => (
-                    <div className={`flex ${message.is_user ? 'justify-start': 'justify-end'} mb-4`} key={
-                        index + "chat-"
-                    }>
-                        <div key={index} className=" max-h-full	 rounded-xl shadow-md  gap-4  w-5/6	">
-                            <div className="p-4 bg-white">
-                                <div className="flex items-center">
-                                    <p className="text-sm font-semibold text-gray-600">{message.name || summaryInfo.session.customer.name}</p>
+                    <>
+                        <div className={`flex ${message.is_user ? 'justify-start': 'justify-end'} mb-4 w-3/6 rounded `} key={
+                            index + "chat-"
+                        }>
+                            <div key={index} className=" max-h-full	   gap-4 	">
+                                <div className="p-4 bg-white mr-4 rounded-xl shadow-md">
+                                    <div className="flex items-center">
+                                        <p className="text-sm font-semibold text-gray-600">{message.name || summaryInfo.session.customer.name}</p>
+                                    </div>
+                                    <div className="mt-2">
+                                        <p className="text-gray-800">{message.message}</p>
+                                    </div>
+                                    <div className="mt-4">
+                                        <p className="text-xs text-gray-500">
+                                            {new Date(message.created_at).toLocaleString()}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="mt-2">
-                                    <p className="text-gray-800">{message.message}</p>
-                                </div>
-                                <div className="mt-4">
-                                    <p className="text-xs text-gray-500">
-                                        {new Date(message.created_at).toLocaleString()}
-                                    </p>
-                                </div>
+
                             </div>
+
                         </div>
-                    </div>
-                ))}
-            </div>
-            <div className={'overflow-auto max-h-full'}>
-                {data.filter(_data => _data.response_feedback !== null).map((message, index) => (
-                    <div key={index} className=" rounded-xl shadow-md overflow-hidden mb-4 ">
-                        <div className="p-4 bg-white">
+                        <div className="  flex justify-end">
                             {message.response_feedback !== null && (
-                                <p className="text-sm text-gray-600">
-                                    Feedback: <Message message={message.response_feedback.rag_response}/>
-                                </p>
+                                <>
+
+                                    <Message message={message.response_feedback}/>
+                                </>
+
                             )}
                         </div>
-                    </div>
+                    </>
                 ))}
             </div>
         </div>
@@ -106,6 +105,11 @@ const MessageComponent = ({ data , summaryInfo}) => {
 };
 
 const Message = ({ message }) => {
-    const content = useMarkdownProcessor(message);
-    return <>{content}</>
+    const content = useMarkdownProcessor(message.rag_response);
+    return <div className={'w-3/6 p-4 bg-white rounded-xl shadow-md '}>
+        <p className={'text-sm font-semibold text-gray-600 mb-2'}>Feedback:</p>{content}
+        <p className="text-xs text-gray-500 capitalize">
+            {message.generated_from}
+        </p>
+    </div>
 }
