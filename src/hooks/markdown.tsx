@@ -41,7 +41,6 @@ const rehypeListItemParagraphToDiv: Plugin<[], any> = () => {
 };
 
 export const useMarkdownProcessor = (content: string) => {
-    debugger
     useEffect(() => {
         mermaid.initialize({ startOnLoad: false, theme: "forest" });
     }, []);

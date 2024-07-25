@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {useMarkdownProcessor} from "@/hooks/markdown";
 
 interface ChatBoxProps {
@@ -28,7 +27,6 @@ export default function ChatBox({message}: ChatBoxProps) {
             </div>
             {message.source_type && <div className="text-sm italic relative -bottom-1 text-right flex justify-end gap-4 text-grayLight2 font-normal text-xs pr-3">
                 {message.source_type}
-                <Image src="/thumbs-down.svg" alt="arrow" width={20} height={20} className={'h-5 self-center'}/>
             </div>}
         </div>
     )
