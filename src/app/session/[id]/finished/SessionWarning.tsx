@@ -14,12 +14,6 @@ export default function SessionWarning({summaryInfo, transcript}: any ) {
               <div dangerouslySetInnerHTML={{__html: summaryInfo?.summary_details?.conversation_summary.replace(/\n/g, '<br>')}} />
           </div>
         }
-        {summaryInfo?.summary_details?.issues_discussed && (
-            <div className="mb-4">
-                <h3 className="text-md font-semibold mb-2">Issues Discussed</h3>
-                <div dangerouslySetInnerHTML={{__html: summaryInfo.summary_details.issues_discussed.replace(/\n/g, '<br>')}} />
-            </div>
-        )}
         {summaryInfo?.summary_details?.action_items_and_challenges && (
             <div className="mb-4">
                 <h3 className="text-md font-semibold mb-2">Action Items and Challenges</h3>
@@ -44,6 +38,13 @@ export default function SessionWarning({summaryInfo, transcript}: any ) {
             <div className="mb-4">
                 <h3 className="text-md font-semibold mb-2">Session Score</h3>
                 <p>{summaryInfo.summary_details.session_score}/10</p>
+            </div>
+        )}
+
+        {summaryInfo?.summary_details?.issues_discussed && (
+            <div className="mb-4">
+                <h3 className="text-md font-semibold mb-2">Issues Discussed</h3>
+                <div dangerouslySetInnerHTML={{__html: summaryInfo.summary_details.issues_discussed.replace(/\n/g, '<br>')}} />
             </div>
         )}
     </div>
