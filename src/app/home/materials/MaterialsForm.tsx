@@ -108,7 +108,7 @@ export const MaterialsForm = () => {
                         type="file"
                         name={'documents'}
                         className="opacity-0 fixed"
-                        accept={'.pdf,.docx,.txt,.ppt'}
+                        accept={'.pdf,.docx,.txt,.pptx'}
                         onChange={(e:any ) => {
                             setFilesName(
                                 Array.from(e.target.files)
