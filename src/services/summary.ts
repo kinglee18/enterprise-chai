@@ -36,16 +36,22 @@ export const getSummary = async (id: string): Promise<any> => {
     return fetchSummary();
 };
 //{(baseUrl})/transcript?companion_session_id=id
-export const getTranscript = async (id: string): Promise<any> => {
+export const getTranscript = async (id: string, responseType = 'json'): Promise<any> => {
     const token = extractToken(document.cookie);
     const response = await axios.get(
         process.env.NEXT_PUBLIC_BACKEND + '/transcript?companion_session_id=' + id,
         {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Token ' + token
-            }
+                'Authorization': 'Token ' + token,
+            },
+            responseType: responseType
         }
     )
-    return response.data;
+    if(responseType === 'json') {
+        return response.data
+    } else if (responseType === 'blob') {
+        return new Blob([response.data], { type: responseType, encoding: 'UTF-8' })
+
+    }
 }

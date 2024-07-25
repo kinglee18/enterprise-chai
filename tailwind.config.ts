@@ -58,6 +58,9 @@ const config: Config = {
                 greenLight600: '#16A249',
                 grayDark1: '#9B9B9B',
                 grayLight2: '#52525B',
+                lightBlue: '#CEEAFF',
+                lightGreen: '#BBF7D0',
+                violetDark: '#C3B4FD',
             },
             fontSize: {
                 xsm:'0.625rem'

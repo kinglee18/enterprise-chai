@@ -208,3 +208,8 @@ nextjs-portal {
     transform: rotate(1turn);
   }
 }
+
+
+.app-tabs > div {
+  background-color: white;
+}

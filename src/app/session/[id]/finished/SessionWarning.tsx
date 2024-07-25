@@ -1,84 +1,113 @@
 'use client'
 import Congratulations from "@/components/Congratulations"
-import {Tab, Tabs} from "@nextui-org/tabs";
-import {CardBody} from "@nextui-org/react";
-import {Card} from "@nextui-org/card";
+import {Button} from "@nextui-org/react";
 import {useMarkdownProcessor} from "@/hooks/markdown";
+import {getTranscript} from "@/services/summary";
+import {useState} from "react";
 
-export default function SessionWarning({summaryInfo, transcript}: any ) {
-    const summaryTab = <div>
+export default function SessionWarning({summaryInfo, transcript, id }: any ) {
+    const [selectedTab, setSelectedTab] = useState(0);
+    const summaryTab = <div className={'m-4 min-h-96 h-[550px] overflow-y-auto'}>
         {
             summaryInfo?.summary_details?.conversation_summary &&
-          <div className="mb-4">
-              <h3 className="text-md font-semibold mb-2">Executive summary</h3>
-              <div dangerouslySetInnerHTML={{__html: summaryInfo?.summary_details?.conversation_summary.replace(/\n/g, '<br>')}} />
+          <div className="mb-4 flex gap-40">
+              <div className={'w-3/6'}>
+                  <h3 className="font-medium  text-xl mb-2">Executive summary</h3>
+                  <div className={'text-sm'} dangerouslySetInnerHTML={{__html: summaryInfo?.summary_details?.conversation_summary.replace(/\n/g, '<br>')}} />
+              </div>
+              <div className={'flex justify-between  w-1/6'}>
+                  {summaryInfo?.summary_details?.session_score && (<div className={'flex flex-col items-center'}>
+                      <div class="w-20 h-20 rounded-full bg-lightBlue flex items-center justify-center">
+                          <span class=" text-base	 font-bold">{summaryInfo.summary_details.session_score}</span>
+                      </div>
+                      <div>
+                          <h3 className="text-md  mb-2 font-sm">Session Score</h3>
+                      </div>
+                  </div>)}
+                  {summaryInfo?.summary_details?.overall_sentiment && (<div className={'flex flex-col items-center'}>
+                      <div class="w-20 h-20 rounded-full bg-lightGreen flex items-center justify-center">
+                          <span class=" text-base	 font-bold">{summaryInfo?.summary_details?.overall_sentiment}</span>
+                      </div>
+                      <div>
+                          <h3 className="text-md  mb-2 font-sm"> Overall Sentiment</h3>
+                      </div>
+                  </div>)}
+              </div>
           </div>
         }
         {summaryInfo?.summary_details?.action_items_and_challenges && (
             <div className="mb-4">
-                <h3 className="text-md font-semibold mb-2">Action Items and Challenges</h3>
+                <h3 className="font-medium  text-xl mb-2">Action Items and Challenges</h3>
                 <MarkDown content={summaryInfo.summary_details.action_items_and_challenges}/>
             </div>
         )}
         {summaryInfo?.summary_details?.critical_insights && (
             <div className="mb-4">
-                <h3 className="text-md font-semibold mb-2">Critical Insights</h3>
-                <p><strong>Renewal Status:</strong> {summaryInfo.summary_details.critical_insights.renewal_status}</p>
-                <p><strong>Competitors Mentioned:</strong> {summaryInfo.summary_details.critical_insights.competitors_mentioned}</p>
-                <p><strong>Customer Product Feedback:</strong> {summaryInfo.summary_details.critical_insights.customer_product_feedback}</p>
-            </div>
-        )}
-        {summaryInfo?.summary_details?.overall_sentiment && (
-            <div className="mb-4">
-                <h3 className="text-md font-semibold mb-2">Overall Sentiment</h3>
-                <p className="capitalize">{summaryInfo.summary_details.overall_sentiment}</p>
-            </div>
-        )}
-        {summaryInfo?.summary_details?.session_score && (
-            <div className="mb-4">
-                <h3 className="text-md font-semibold mb-2">Session Score</h3>
-                <p>{summaryInfo.summary_details.session_score}/10</p>
+                <h3 className="font-medium  text-xl mb-2">Critical Insights</h3>
+                <p><span className={''}>Renewal Status:</span> {summaryInfo.summary_details.critical_insights.renewal_status}</p>
+                <p><span className={''}>Competitors Mentioned:</span> {summaryInfo.summary_details.critical_insights.competitors_mentioned}</p>
+                <p><span className={''}>Customer Product Feedback:</span> {summaryInfo.summary_details.critical_insights.customer_product_feedback}</p>
             </div>
         )}
 
+
+
         {summaryInfo?.summary_details?.issues_discussed && (
             <div className="mb-4">
-                <h3 className="text-md font-semibold mb-2">Issues Discussed</h3>
+                <h3 className="font-medium  text-xl mb-2">Issues Discussed</h3>
                 <div dangerouslySetInnerHTML={{__html: summaryInfo.summary_details.issues_discussed.replace(/\n/g, '<br>')}} />
             </div>
         )}
     </div>
 
+    const downloadBloab = async () => {
+        const blob = await getTranscript(id, 'blob');
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'transcript.json';
+        a.click();
+
+    }
+
     return (
         <div className="w-full ">
-            <Congratulations />
-            <div className=" ">
-                <div className="">
-                    <main className="">
+            <Congratulations summaryInfo={summaryInfo}/>
+            <div className={'flex gap-2'}>
+                <Button
+                    className={`${selectedTab === 0  ? 'bg-violetDark' : 'bg-violetLight'}  w-36 h-12 rounded`}
+                    onClick={()  => setSelectedTab(0)}>
+                    Summary
+                </Button>
+                <Button
+                    className={`${selectedTab === 1? 'bg-violetDark' : 'bg-violetLight'} w-36 h-12 rounded`}
+                    onClick={()  => setSelectedTab(1)}>
+                    Transcript
+                </Button>
+            </div>
 
-                        <div>
-                            <Card
-                                className={'bg-darkViolet min-h-96'}
-                            >
-                                <CardBody>
-                                    <Tabs>
-                                        <Tab
-                                            title={'Session Summary'}
-                                        >
-                                            {
-                                                summaryTab
-                                            }
-                                        </Tab>
-                                        <Tab
-                                            title={'Transcript'}
-                                        >
-                                            <MessageComponent data={transcript} summaryInfo={summaryInfo}/>
-                                        </Tab>
+            <div >
+                <div>
+                    <main>
 
-                                    </Tabs>
-                                </CardBody>
-                            </Card>
+                        <div
+                            className={'bg-whiteGray my-2 p-3'}
 
+                        >
+
+                            {   selectedTab === 0 && summaryTab}
+
+
+                            {
+                                selectedTab === 1 && (<>
+                                    <MessageComponent data={transcript} summaryInfo={summaryInfo} id={id}/>
+                                    <Button
+                                        className={'btn-feedback bg-violetDark'}
+                                        onClick={downloadBloab}
+                                    >Download </Button>
+                                </>
+                                )
+                            }
 
                         </div>
                     </main>
@@ -94,17 +123,20 @@ export default function SessionWarning({summaryInfo, transcript}: any ) {
 }
 
 
-const MessageComponent = ({ data , summaryInfo}) => {
+const MessageComponent = ({ data , summaryInfo }) => {
+
     return (
-        <div className="m-4   justify-center	">
-            <div className={''}>
+        <div className="m-4 min-h-96 h-[550px] overflow-y-auto	">
+            <div className={
+                ' '
+            }>
                 {data.map((message, index) => (
                     <>
-                        <div className={`flex ${message.is_user ? 'justify-start': 'justify-end'} mb-4 w-3/6 rounded pr-3`} key={
+                        <div className={` mb-4 w-3/6 rounded pr-3`} key={
                             index + "chat-"
                         }>
-                            <div key={index} className=" max-h-full	   gap-4 	">
-                                <div className="p-4 bg-white  rounded-xl shadow-md">
+                            <div key={index} className={` max-h-full	   gap-4  flex ${message.is_user ? 'justify-start' : 'justify-end'} 	`}>
+                                <div className="p-4 bg-white  rounded-xl shadow-md w-5/6">
                                     <div className="flex items-center">
                                         <p className="text-sm font-semibold text-gray-600">{message.name || summaryInfo.session.customer.name}</p>
                                     </div>
@@ -133,6 +165,7 @@ const MessageComponent = ({ data , summaryInfo}) => {
                     </>
                 ))}
             </div>
+
         </div>
     );
 };
