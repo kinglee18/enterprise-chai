@@ -12,7 +12,7 @@ export default function SessionWarning({summaryInfo, transcript, id }: any ) {
             summaryInfo?.summary_details?.conversation_summary &&
           <div className=" flex gap-40">
               <div className={'w-3/6'}>
-                  <h3 className="font-medium  text-xl mb-2">Executive summary</h3>
+                  <h3 className="font-medium  text-xl mb-2">Executive Summary</h3>
                   <div className={'text-sm'} dangerouslySetInnerHTML={{__html: summaryInfo?.summary_details?.conversation_summary.replace(/\n/g, '<br>')}} />
               </div>
               <div className={'flex gap-6  w-3/6 justify-end px-10'}>
