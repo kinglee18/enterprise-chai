@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import {signInApp} from "../../auth";
+import {signInApp, signOutApp} from "../../auth";
 import axiosInterceptorInstance from "../../axiosInterceptorInstance";
 import {redirect} from "next/navigation";
 import {cookies} from "next/headers";
@@ -56,3 +56,25 @@ export async function authenticate(
     return { message: response.message };
 }
 
+export async function userStats() {
+    try {
+        const token = cookies()?.get('token')?.value
+        const response = await axiosInterceptorInstance.get('/userstats', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + token,
+            }
+        });
+        return response.data;
+    } catch (e) {
+        return { message: 'failed to get user status'}
+    }
+}
+
+export async function logout() {
+    const response = await signOutApp()
+    if (response.status === 200) {
+        cookies().delete('token')
+        redirect("/login");
+    }
+}

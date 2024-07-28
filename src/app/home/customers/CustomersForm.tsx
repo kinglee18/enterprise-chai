@@ -19,7 +19,7 @@ export const CustomersForm = ({products}) => {
             <input
                 required
                 type="text"
-                className="form-input mt-1 block w-full"
+                className="form-input mt-1 block w-full border border-gray-500"
                 name={'name'}
             />
         </div>
@@ -28,7 +28,7 @@ export const CustomersForm = ({products}) => {
             <input
                 required
                 type="text"
-                className="form-input mt-1 block w-full"
+                className="form-input mt-1 block w-full border border-gray-500"
                 name={'point_of_contact'}
                 placeholder="Point of contact name"
             />
@@ -38,7 +38,7 @@ export const CustomersForm = ({products}) => {
             <input
                 required
                 type="email"
-                className="form-input mt-1 block w-full"
+                className="form-input mt-1 block w-full border border-gray-500"
                 name={'email'}
                 placeholder="customer email"
             />
@@ -48,7 +48,7 @@ export const CustomersForm = ({products}) => {
             <select
                 multiple
                 required
-                className="p-2  border rounded flex items-center w-full"
+                className="p-2 rounded flex items-center w-full border border-gray-500"
                 name={'interested_products'}>
                 {
                     products.map((product) => {

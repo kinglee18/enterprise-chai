@@ -25,18 +25,15 @@ export default function AppTabs({tabContent, isNew}: AppTabsProps) {
         router.push(selectedTab.url);
     };
     return (
-        <Card>
-            <CardBody>
-                <Tabs
-                    onSelectionChange={handleTabChange}
-                >
-                    {tabContent.map((tab, index) => (
-                        <Tab key={index} title={tab.title}>
-                            {tab.tabContent}
-                        </Tab>
-                    ))}
-                </Tabs>
-            </CardBody>
-        </Card>
+        <Tabs
+            onSelectionChange={handleTabChange}
+            variant="underlined"
+        >
+            {tabContent.map((tab, index) => (
+                <Tab key={index} title={tab.title}>
+                    {tab.tabContent}
+                </Tab>
+            ))}
+        </Tabs>
     )
 }

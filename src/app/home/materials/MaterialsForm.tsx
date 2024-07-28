@@ -66,7 +66,7 @@ export const MaterialsForm = () => {
             <input
                 required
                 type="text"
-                className="form-input mt-1 block w-full"
+                className="form-input mt-1 block w-full border border-gray-500"
                 name={'name'}
                 placeholder="Product name*"
                 onChange={(e) => {
@@ -107,7 +107,7 @@ export const MaterialsForm = () => {
                     <input
                         type="file"
                         name={'documents'}
-                        className="opacity-0 fixed"
+                        className="opacity-0 fixed border border-gray-500"
                         accept={'.pdf,.docx,.txt,.pptx'}
                         onChange={(e:any ) => {
                             setFilesName(

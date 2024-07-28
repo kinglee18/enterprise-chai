@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import CustomersTable from "@/app/home/customers/CustomersTable";
 import React from "react";
 import {getProducts} from "@/services/products";
-import {CardBody, Card} from "@nextui-org/card";
 
 export default async function Customers({
     searchParams
@@ -40,11 +39,7 @@ export default async function Customers({
                 </a>
             </div>
             <div>
-                <Card>
-                    <CardBody>
-                        <CustomersTable data={customers}/>
-                    </CardBody>
-                </Card>
+                <CustomersTable data={customers}/>
             </div>
         </main>
     )

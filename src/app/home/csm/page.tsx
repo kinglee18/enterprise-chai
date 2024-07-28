@@ -11,6 +11,7 @@ import {getProducts} from "@/services/products";
 import Anchor from "@/app/home/csm/anchor";
 import AppTabs, {AppTabsProps} from "@/app/home/csm/tabs";
 import {getCustomers} from "@/services/customers";
+import { userStats } from "@/actions/account";
 
 export default async function List({searchParams}: any ) {
     const isPending = searchParams.status === 'pending' || !searchParams.status;
@@ -20,23 +21,22 @@ export default async function List({searchParams}: any ) {
     const customers = await getCustomers();
     const tableTitle = isPending ? "Active created sessions" : "Call Summary";
 
-
-
+    const userstats = await userStats();
 
     const pendingCallsColumns: TableColumn[] = [
         { key: 'customer', title: 'Customer' },
-        { key: 'point_of_contact', title: 'Customer point of contact' },
+        { key: 'point_of_contact', title: 'Customer Point Of Contact' },
         { key: 'conversationIntent', title: 'Conversation Intent' },
-        { key: 'created', title: 'Created', width: 'w-1/4' },
-        { key: 'tools', title:'',width:'w-1/4' },
+        { key: 'created', title: 'Created'},
+        { key: 'tools', title:'' },
     ];
 
     const finishedCallsColumns: TableColumn[] = [
-        { key: 'session_number', title: 'Session no' },
+        { key: 'session_number', title: 'Session No' },
         { key: 'conversationIntent', title: 'Conversation Intent' },
         { key: 'customer', title: 'Customer' },
         { key: 'created', title: 'Date' },
-        { key: 'tools', title:'',width:'w-1/4' }
+        { key: 'tools', title:'' }
     ];
     const getTools = (id: number) => (
         <div className="flex items-center justify-end gap-6">
@@ -63,11 +63,11 @@ export default async function List({searchParams}: any ) {
             tools: isPending ? getTools(session.id) : completedSessionTools(session.id),
         }
     })
+
     const tabContent: AppTabsProps = [
         {
             tabContent: <Table
                 key={1}
-                title={tableTitle}
                 columns={isPending ? pendingCallsColumns : finishedCallsColumns}
                 data={data}
             />,
@@ -77,7 +77,6 @@ export default async function List({searchParams}: any ) {
         {
             tabContent: <Table
                 key={2}
-                title={tableTitle}
                 columns={isPending ? pendingCallsColumns : finishedCallsColumns}
                 data={data}
             />,
@@ -85,9 +84,14 @@ export default async function List({searchParams}: any ) {
             url: '/home/csm?status=completed'
         }
     ]
+
+
     return (
         <div className="w-full px-9">
-            <Header title={'CSM Companion'} subtitle={'Manage your customer success sessions here. Create new sessions, view active and completed sessions, and relaunch as needed.'}/>
+            <Header 
+                title={'CSM Companion'} 
+                subtitle={'Manage your customer success sessions here. Create new sessions, view active and completed sessions, and relaunch as needed.'}
+            />
             <div className={'justify-center my-5'}>
 
                 <div className="flex gap-x-3">

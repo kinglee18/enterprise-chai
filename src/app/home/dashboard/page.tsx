@@ -18,9 +18,9 @@ export default function Dashboard() {
             description: 'Activate your AI companion for real-time guidance & feedback throughout your client call.'
         }]
     return (
-        <main className="w-full px-9">
+        <div className="w-full px-9">
             <Header title={'Hello David'} subtitle={'“You will succeed if you have delighted customers. Don’t settle for satisfied!”'}/>
-            <div className="flex gap-5">
+            <div className="flex flex-col md:flex-row gap-5 mt-8">
                 <Infographics />
                 <Image width={800} height={400} src="/chart.png" alt="dashboard" />
             </div>
@@ -39,6 +39,6 @@ export default function Dashboard() {
                     ))}
                 </div>
             </div>
-        </main>
+        </div>
     )
 }

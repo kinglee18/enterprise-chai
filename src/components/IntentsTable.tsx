@@ -22,7 +22,7 @@ export default function IntentsTable() {
                             height={16}
                             className='absolute left-3 top-1/2 transform -translate-y-1/2 hidden'
                         />
-                        <input type="search" placeholder='Type here...' className='search-input pl-8  pr-4 mr-3.5'/>
+                        <input type="search" placeholder='Type here...' className='search-input pl-8 pr-4 mr-3.5 border border-gray-500'/>
                     </div>
                     <button className={'hidden'}>
                         <Image
