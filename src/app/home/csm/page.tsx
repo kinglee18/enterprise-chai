@@ -11,7 +11,6 @@ import {getProducts} from "@/services/products";
 import Anchor from "@/app/home/csm/anchor";
 import AppTabs, {AppTabsProps} from "@/app/home/csm/tabs";
 import {getCustomers} from "@/services/customers";
-import { userStats } from "@/actions/account";
 
 export default async function List({searchParams}: any ) {
     const isPending = searchParams.status === 'pending' || !searchParams.status;
@@ -19,9 +18,7 @@ export default async function List({searchParams}: any ) {
     const sessions = await getSessions(isPending)
     const products = await getProducts();
     const customers = await getCustomers();
-    const tableTitle = isPending ? "Active created sessions" : "Call Summary";
 
-    const userstats = await userStats();
 
     const pendingCallsColumns: TableColumn[] = [
         { key: 'customer', title: 'Customer' },
@@ -88,8 +85,8 @@ export default async function List({searchParams}: any ) {
 
     return (
         <div className="w-full px-9">
-            <Header 
-                title={'CSM Companion'} 
+            <Header
+                title={'CSM Companion'}
                 subtitle={'Manage your customer success sessions here. Create new sessions, view active and completed sessions, and relaunch as needed.'}
             />
             <div className={'justify-center my-5'}>

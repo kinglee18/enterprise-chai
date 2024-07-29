@@ -1,5 +1,5 @@
 'use client'
-import {Tabs, Tab, Card, CardBody} from "@nextui-org/react";
+import {Tabs, Tab} from "@nextui-org/react";
 import React from "react";
 import { useRouter } from 'next/navigation'; // Import useRouter from Next.js
 

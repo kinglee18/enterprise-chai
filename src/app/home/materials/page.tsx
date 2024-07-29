@@ -5,7 +5,6 @@ import {MaterialsForm} from "@/app/home/materials/MaterialsForm";
 import MaterialsTable from "@/app/home/materials/MaterialTable";
 import {getMaterials, getTemplates} from "@/services/materials";
 import TemplatesTable from "@/app/home/materials/TemplatesTable";
-import { Card, CardBody} from "@nextui-org/react";
 
 
 export default async function Materials({searchParams}: any ) {

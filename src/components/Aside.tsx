@@ -44,13 +44,13 @@ export default function Aside() {
 
         <div className="flex flex-col px-3 mb-4">
             <button
-                    className={`btn-dashboard whitespace-nowrap`}
-                    onClick={handleLogout}
-                    key={'logout'}>
-                    <div>
-                        <FaSignOutAlt/>
-                    </div>
-                    {'Logout'}
+                className={`btn-dashboard whitespace-nowrap`}
+                onClick={handleLogout}
+                key={'logout'}>
+                <div>
+                    <FaSignOutAlt/>
+                </div>
+                {'Logout'}
             </button>
         </div>
 
