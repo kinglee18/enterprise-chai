@@ -10,7 +10,8 @@ export default function Header({title, subtitle}: HeaderProps) {
         <nav className='w-full  pt-2 pb-2 flex justify-between items-center border-b border-grayDark mb-3 gap-2'>
             <div className='w-11/12'>
                 <h2>{title}</h2>
-                <p className={'font-montserrat text-grayLight2 text-sm'}>{subtitle}</p>
+                {/* <p className={'font-montserrat text-grayLight2 text-md'}>{subtitle}</p> */}
+                {subtitle && <p className={'font-montserrat text-grayLight2 text-md'}>{subtitle}</p>}
             </div>
             <div className='w-1/4 flex justify-end items-center gap-4'>
                 <div className='relative'>
@@ -21,7 +22,7 @@ export default function Header({title, subtitle}: HeaderProps) {
                         height={16}
                         className='absolute left-3 top-1/2 transform -translate-y-1/2'
                     />
-                    <input type="search" placeholder='Type here...' className='hidden search-input pl-8  pr-4'/>
+                    <input type="search" placeholder='Type here...' className='hidden search-input pl-8 pr-4 border border-gray-500'/>
                 </div>
 
                 <div className='flex gap-4 gap-y-0 hidden'>

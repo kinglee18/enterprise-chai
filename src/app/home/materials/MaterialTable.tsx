@@ -37,7 +37,6 @@ export default function MaterialsTable({data}: MaterialsTableProps) {
 
 
     return (<Table
-        title={'Recent Documents'}
         columns={[
             {title: 'Name', key: 'name', width: 'w-[50p]'},
             {title: 'Tags', key: 'tags', width: 'w-[50p]'},

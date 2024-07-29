@@ -55,12 +55,7 @@ export default async function Materials({searchParams}: any ) {
                 </a>
             </div>
             <div>
-                <Card>
-                    <CardBody>
-                        <MaterialsTable data={data.materials}/>
-
-                    </CardBody>
-                </Card>
+                <MaterialsTable data={data.materials}/>
             </div>
         </main>
     )

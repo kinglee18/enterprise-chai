@@ -31,13 +31,13 @@ export default function Register({
                         <p className='welcome-back'>Create an account</p>
                         <h3 className='mb-10'>Already have an account? <a
                             href={'/login'}
-                            className={'text-primarySmall'}>Log-in</a></h3>
+                            className={'text-primarySmall'}>Log in</a></h3>
                         <section className={'flex gap-3 flex-col'}>
                             <div>
                                 <label className="text-gray-700">name</label>
                                 <input
                                     type="text"
-                                    className="form-input mt-1 block w-full"
+                                    className="form-input mt-1 block w-full border border-gray-500"
                                     placeholder="enter your name"
                                     name={'username'}
                                 />
@@ -46,7 +46,7 @@ export default function Register({
                                 <label className="text-gray-700">email</label>
                                 <input
                                     type="text"
-                                    className="form-input mt-1 block w-full"
+                                    className="form-input mt-1 block w-full border border-gray-500"
                                     placeholder="enter your email"
                                     name={'email'}
                                 />
@@ -55,7 +55,7 @@ export default function Register({
                                 <label className="text-gray-700">password</label>
                                 <input
                                     type="password"
-                                    className="form-input mt-1 block w-full"
+                                    className="form-input mt-1 block w-full border border-gray-500"
                                     placeholder="enter your password"
                                     name={'password'}
                                 />
@@ -64,7 +64,7 @@ export default function Register({
                         <div className="flex gap-2 pt-4 pb-4 mb-8">
                             <input
                                 type="checkbox"
-                                className='checkbox-login'
+                                className='checkbox-login border border-gray-500'
                                 checked={checked}
                                 onChange={(event) => {
                                     setChecked(event.target.checked)

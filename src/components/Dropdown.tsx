@@ -8,7 +8,7 @@ interface DropdownProps {
 }
 export default function Dropdown({options, onChange, value}: DropdownProps) {
     return (
-        <select className="p-2 h-12 border rounded flex items-center w-full" onChange={onChange} value={value}>
+        <select className="p-2 h-12 border border-gray-500 rounded flex items-center w-full" onChange={onChange} value={value}>
             {options.map((option, index) => (
                 <option key={index} value={option.value} className="h-12 p-4">
                     {option.label}

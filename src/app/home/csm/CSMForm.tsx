@@ -27,7 +27,7 @@ export const CSMForm = ({phases, products, customers}: CSMFormProps) => {
     return <form className={'flex flex-col gap-4'} action={formAction}>
         <div className="block">
             <span className="text-gray-700">Customer journey phase *</span>
-            <select required className="p-2 h-12 border rounded flex items-center w-full" name={'journey_phase'}>
+            <select required className="p-2 h-12 rounded flex items-center w-full border border-gray-500" name={'journey_phase'}>
                 {
                     phases.map((phase) => {
                         return <option key={phase.id} value={phase.phase}>{phase.phase}</option>
@@ -37,7 +37,7 @@ export const CSMForm = ({phases, products, customers}: CSMFormProps) => {
         </div>
         <div className="block">
             <span className="text-gray-700">Customer *</span>
-            <select required className="p-2 h-12 border rounded flex items-center w-full" name={'customer'}>
+            <select required className="p-2 h-12 rounded flex items-center w-full border border-gray-500" name={'customer'}>
                 {
                     customers.map((customer) => {
                         return <option key={customer.id} value={customer.id}>{customer.name}</option>
@@ -47,7 +47,7 @@ export const CSMForm = ({phases, products, customers}: CSMFormProps) => {
         </div>
         <div className="block">
             <span className="text-gray-700">Product*</span>
-            <select required className="p-2 h-12 border rounded flex items-center w-full" name={'product'}>
+            <select required className="p-2 h-12 rounded flex items-center w-full border border-gray-500" name={'product'}>
                 {
                     products.map((product) => {
                         return <option key={product.id} value={product.id}>{product.name}</option>
@@ -58,7 +58,7 @@ export const CSMForm = ({phases, products, customers}: CSMFormProps) => {
         <div>
             <span className="text-gray-700">Description</span>
             <textarea
-                className="form-input  block w-full h-28"
+                className="form-input block w-full h-28 border border-gray-500"
                 name={'description'}>
             </textarea>
         </div>
