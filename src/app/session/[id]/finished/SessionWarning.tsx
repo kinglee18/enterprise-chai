@@ -74,7 +74,6 @@ export default function SessionWarning({summaryInfo, transcript, id }: any ) {
 
     }
 
-    debugger
     return (
         <div className="w-full ">
             <Congratulations summaryInfo={summaryInfo}/>
