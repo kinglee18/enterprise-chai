@@ -48,6 +48,12 @@ export const TagInput = (
                 value={inputValue}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
+                onBlur={() => {
+                    if (inputValue.trim() !== '' && tags.length < 5) {
+                        setTags([...tags, inputValue.trim()]);
+                        setInputValue('');}
+                }
+                }
                 placeholder={tags.length === 0 ? "Type and press space to add tags (max 5)" : ""}
                 disabled={tags.length >= 5}
                 startContent={
