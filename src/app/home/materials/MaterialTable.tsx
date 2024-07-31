@@ -18,7 +18,8 @@ export default function MaterialsTable({data}: MaterialsTableProps) {
 
         return {
             name: item.product.name,
-            tags: <div className={'flex gap-1'}> {item.product.tags.split(" ").map(
+            tags: <div className={'flex gap-1'}> {item.product.tags.split(" ").filter(
+                (tag) => tag !== "").map(
                 (tag, index) =>
                     <Chip
                         key={'tag' + index}
