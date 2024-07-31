@@ -42,7 +42,7 @@ export const handleStartCapture = async ({
             throw new Error('WebSocket error:', error);
         };
         microphoneWS.onmessage = (event) => {
-            setMicrophoneMessages(_value => [..._value, JSON.parse(event.data)]);
+            setMicrophoneMessages(_value => getOrderedMessages(_value, JSON.parse(event.data)));
         }
         tabWS.onopen = () => {
             tabRecorder.start(100)
@@ -51,7 +51,7 @@ export const handleStartCapture = async ({
             throw new Error('WebSocket error:', error);
         };
         tabWS.onmessage = (event) => {
-            setTabMessages(_value => [..._value, JSON.parse(event.data)]);
+            setTabMessages(_value => getOrderedMessages(_value, JSON.parse(event.data)));
         }
         assistantWS.onmessage = (event) => {
             const newMessage = JSON.parse(event.data);
@@ -79,3 +79,25 @@ export const handleStartCapture = async ({
         console.error('Error capturing audio:', error);
     }
 };
+
+
+
+type Message = {
+    answer: string,
+    source_type: string,
+    is_final: boolean,
+    type: string
+
+}
+
+const getOrderedMessages = (prevMessages: Message[], newMsg) => {
+    if (newMsg.answer === '') return prevMessages;
+    if (prevMessages.length > 0 && !newMsg.is_final && !prevMessages[prevMessages.length - 1].is_final) {
+        prevMessages[prevMessages.length - 1] = newMsg;
+        return [...prevMessages];
+    }
+    if (prevMessages.length > 0 && newMsg.is_final && prevMessages[prevMessages.length - 1].is_final) {
+        return [...prevMessages, newMsg];
+    }
+    return [...prevMessages, newMsg];
+}
