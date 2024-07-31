@@ -22,7 +22,7 @@ export const getSummary = async (id: string): Promise<any> => {
 
         if (summary.length === 0) {
             if (Date.now() - startTime >= timeoutDuration) {
-                return "Timeout: Unable to retrieve summary after 5 seconds";
+                return Promise.resolve([]);
             }
 
             // Wait for 1 second before retrying
