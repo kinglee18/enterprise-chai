@@ -22,7 +22,7 @@ export default function Finished({params}) {
     }, [params.id]);
 
 
-    if (lodingSummary) {
+    if (lodingSummary && transcript === null) {
         return <Loading msg={<span>{'Generating call summary....'}</span>}/>;
     }
 
