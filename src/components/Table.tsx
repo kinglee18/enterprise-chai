@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 
 export interface TableProps {
-  title: string
+  title?: string
   columns: TableColumn[];
   data: TableRow[];
 }
@@ -17,8 +17,8 @@ export interface TableRow {
 
 
 export default function Table({
-    title, 
-    columns, 
+    title,
+    columns,
     data,
     showSearch = false,
 }: TableProps) {
@@ -47,7 +47,7 @@ export default function Table({
                                     height={40}
                                 />
                             </button>
-                        </div> 
+                        </div>
                     )}
                 </div>
             )}

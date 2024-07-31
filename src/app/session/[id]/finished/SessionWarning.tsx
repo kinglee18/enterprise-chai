@@ -129,15 +129,23 @@ export default function SessionWarning({summaryInfo, transcript, id }: any ) {
     )
 }
 
+const orderByDate = (a, b) => {
+    return new Date(a.created_at) - new Date(b.created_at);
+}
 
-const MessageComponent = ({ data , summaryInfo }) => {
+const MessageComponent = ({ data , summaryInfo }:
+    {
+        data: any [];
+        summaryInfo: any;
+    }
+) => {
 
     return (
         <div className="m-4 min-h-96 h-[550px] overflow-y-auto	pr-2">
             <div className={
                 ' '
             }>
-                {data.map((message, index) => (
+                {data.sort(orderByDate).map((message, index) => (
                     <>
                         <div className={` mb-4 w-3/6 rounded pr-3`} key={
                             index + "chat-"
