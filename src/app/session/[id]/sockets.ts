@@ -1,3 +1,5 @@
+import {getOrderedMessages} from "@/utils";
+
 const socketURL = process.env.NEXT_PUBLIC_WS;
 
 
@@ -80,24 +82,3 @@ export const handleStartCapture = async ({
     }
 };
 
-
-
-type Message = {
-    answer: string,
-    source_type: string,
-    is_final: boolean,
-    type: string
-
-}
-
-const getOrderedMessages = (prevMessages: Message[], newMsg) => {
-    if (newMsg.answer === '') return prevMessages;
-    if (prevMessages.length > 0 && !newMsg.is_final && !prevMessages[prevMessages.length - 1].is_final) {
-        prevMessages[prevMessages.length - 1] = newMsg;
-        return [...prevMessages];
-    }
-    if (prevMessages.length > 0 && newMsg.is_final && prevMessages[prevMessages.length - 1].is_final) {
-        return [...prevMessages, newMsg];
-    }
-    return [...prevMessages, newMsg];
-}
