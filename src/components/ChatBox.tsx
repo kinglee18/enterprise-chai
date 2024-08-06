@@ -1,14 +1,39 @@
 import {useMarkdownProcessor} from "@/hooks/markdown";
+import { HiOutlineHandThumbDown } from "react-icons/hi2";
+import { HiOutlineHandThumbUp } from "react-icons/hi2";
+import {sendFeedback} from "@/services/feedback";
+import {useState} from "react";
 
 interface ChatBoxProps {
     message: {
         answer: string;
         timestamp: string;
         source_type: string;
+        message_id: string;
     }
 }
 export default function ChatBox({message}: ChatBoxProps) {
     const content = useMarkdownProcessor(message.answer);
+    const [isLiked, setIsLiked] = useState();
+
+    const onLike = async () => {
+        try {
+            const response = await sendFeedback(message.message_id, true);
+            setIsLiked(true)
+            console.log(response);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    const onDislike = async () => {
+        try {
+            const response = await sendFeedback(message.message_id, false);
+            setIsLiked(false)
+            console.log(response);
+        } catch (e) {
+            console.log(e);
+        }
+    }
     return (
         <div className={""}>
             <div className="w-full p-4 bg-white rounded-2xl shadow-md mb-3">
@@ -25,9 +50,23 @@ export default function ChatBox({message}: ChatBoxProps) {
                     </div>
                 </div>
             </div>
-            {message.source_type && <div className="text-sm italic relative -bottom-1 text-right flex justify-end gap-4 text-grayLight2 font-normal text-xs pr-3">
-                {message.source_type}
-            </div>}
+
+            <div className="relative -bottom-1 text-right flex justify-end  pr-3 gap-3">
+                <div className={'flex gap-3'}>
+                    <HiOutlineHandThumbUp
+                        className={`${isLiked ? 'text-green-500' : 'text-grayLight2'}`}
+                        onClick={() => onLike(message.message_id)}
+                    />
+                    <HiOutlineHandThumbDown
+                        className={`${isLiked === false ? 'text-red-500' : 'text-grayLight2' }`}
+                        onClick={() => onDislike(message.message_id)}
+                    />
+                </div>
+                <span className={'text-grayLight2 font-normal  text-sm italic '}>{message.source_type}</span>
+
+            </div>
+
+
         </div>
     )
 }

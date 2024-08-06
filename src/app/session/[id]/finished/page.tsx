@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import {getSummary, getTranscript} from "@/services/summary";
-import SessionWarning from "@/app/session/[id]/finished/SessionWarning";
+import FinishedSession from "@/app/session/[id]/finished/FinishedSession";
 import Loading from "@/app/session/[id]/finished/loading";
 
 export default function Finished({params}) {
@@ -38,7 +38,7 @@ export default function Finished({params}) {
     }
     return (
         <main className="w-full px-9">
-            <SessionWarning summaryInfo={summaryInfo} transcript={transcript} id={params.id}/>
+            <FinishedSession summaryInfo={summaryInfo} transcript={transcript} id={params.id}/>
         </main>
     );
 }

@@ -15,12 +15,14 @@ interface Phase {
 }
 interface CSMFormProps {
     phases: Phase[];
-    products: any[];
+    customers: any[];
 }
-export const CSMForm = ({phases, products, customers}: CSMFormProps) => {
+export const CSMForm = ({phases, customers}: CSMFormProps) => {
 
     // eslint-disable-next-line no-unused-vars
     const [state, formAction] = useFormState(saveSession, initialState);
+    const [selectedCustomer, setSelectedCustomer] = React.useState();
+
     if (state?.session) {
         window.open(`/session/${state.session}/active`, "CSMWindow", "popup")
     }
@@ -37,7 +39,14 @@ export const CSMForm = ({phases, products, customers}: CSMFormProps) => {
         </div>
         <div className="block">
             <span className="text-gray-700">Customer *</span>
-            <select required className="p-2 h-12 rounded flex items-center w-full border border-gray-500" name={'customer'}>
+            <select
+                required
+                className="p-2 h-12 rounded flex items-center w-full border border-gray-500"
+                onChange={(e) => setSelectedCustomer(
+                    customers.find((customer) => customer.id === parseInt(e.target.value))
+                )}
+                name={'customer'}>
+                <option selected disabled>Select customer</option>
                 {
                     customers.map((customer) => {
                         return <option key={customer.id} value={customer.id}>{customer.name}</option>
@@ -45,16 +54,17 @@ export const CSMForm = ({phases, products, customers}: CSMFormProps) => {
                 }
             </select>
         </div>
-        <div className="block">
+        { selectedCustomer && <div className="block">
             <span className="text-gray-700">Product*</span>
-            <select required className="p-2 h-12 rounded flex items-center w-full border border-gray-500" name={'product'}>
+            <select required className="p-2 h-12 rounded flex items-center w-full border border-gray-500"
+                name={'product'}>
                 {
-                    products.map((product) => {
+                    selectedCustomer.interested_products.map((product) => {
                         return <option key={product.id} value={product.id}>{product.name}</option>
                     })
                 }
             </select>
-        </div>
+        </div>}
         <div>
             <span className="text-gray-700">Description</span>
             <textarea
