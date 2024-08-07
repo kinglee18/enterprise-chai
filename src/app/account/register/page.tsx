@@ -34,8 +34,19 @@ export default function Register({
                             className={'text-primarySmall'}>Log in</a></h3>
                         <section className={'flex gap-3 flex-col'}>
                             <div>
-                                <label className="text-gray-700">name</label>
+                                <label className="text-gray-700">Tenant</label>
                                 <input
+                                    required
+                                    type="text"
+                                    className="form-input mt-1 block w-full border border-gray-500"
+                                    placeholder="enter your tenant"
+                                    name={'tenant'}
+                                />
+                            </div>
+                            <div>
+                                <label className="text-gray-700">Name</label>
+                                <input
+                                    required
                                     type="text"
                                     className="form-input mt-1 block w-full border border-gray-500"
                                     placeholder="enter your name"
@@ -43,8 +54,9 @@ export default function Register({
                                 />
                             </div>
                             <div>
-                                <label className="text-gray-700">email</label>
+                                <label className="text-gray-700">Email</label>
                                 <input
+                                    required
                                     type="text"
                                     className="form-input mt-1 block w-full border border-gray-500"
                                     placeholder="enter your email"
@@ -54,6 +66,7 @@ export default function Register({
                             <div>
                                 <label className="text-gray-700">password</label>
                                 <input
+                                    required
                                     type="password"
                                     className="form-input mt-1 block w-full border border-gray-500"
                                     placeholder="enter your password"
@@ -63,6 +76,7 @@ export default function Register({
                         </section>
                         <div className="flex gap-2 pt-4 pb-4 mb-8">
                             <input
+                                required
                                 type="checkbox"
                                 className='checkbox-login border border-gray-500'
                                 checked={checked}
