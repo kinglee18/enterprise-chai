@@ -70,7 +70,7 @@ export default function Table({
                             <tr key={index} className="h-9">
                                 {columns.map((column, colIndex) => (
                                     <td key={colIndex}
-                                        className={`px-8 py-5 ${column.width}`}>{row[column.key]}</td>
+                                        className={`px-8 py-5 text-center ${column.width}`}>{row[column.key]}</td>
                                 ))}
                             </tr>
                         ))}

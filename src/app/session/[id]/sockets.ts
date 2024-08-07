@@ -1,4 +1,4 @@
-import {getOrderedMessages} from "@/utils";
+import {getOrderedMessages, utcHourToLocale} from "@/utils";
 
 const socketURL = process.env.NEXT_PUBLIC_WS;
 
@@ -56,9 +56,11 @@ export const handleStartCapture = async ({
             setTabMessages(_value => getOrderedMessages(_value, JSON.parse(event.data)));
         }
         assistantWS.onmessage = (event) => {
-            const newMessage = JSON.parse(event.data);
-            //add the previous messages to the array. replace the last message in the array if it does not contain the field source_type
-
+            const data = JSON.parse(event.data)
+            const newMessage = {
+                ...data,
+                timestamp: utcHourToLocale(data.timestamp)
+            }
             setAssistantMessages(_value => {
                 if (_value.length > 0 &&
                     (!_value[_value.length - 1].source_type || _value[_value.length - 1].source_type === '' )){

@@ -18,7 +18,6 @@ export default function CustomersTable({data}: MaterialsTableProps) {
 
     return (<Table
         columns={[
-            {title: 'Id', key: 'id', width: 'w-[50p]'},
             {title: 'Name', key: 'name', width: 'w-[50p]'},
             {title: 'Email', key: 'email', width: 'w-[50p]'},
             {title: 'Point Of Contact', key: 'point_of_contact', width: 'w-[50p]'},
