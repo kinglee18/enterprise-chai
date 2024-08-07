@@ -7,7 +7,6 @@ import moment from "moment";
 import {CSMForm} from "@/app/home/csm/CSMForm";
 import {getJourneyPhases, getSessions} from "@/services/sessions";
 import {DeleteForm} from "@/app/home/csm/DeleteSessionForm";
-import {getProducts} from "@/services/products";
 import Anchor from "@/app/home/csm/anchor";
 import AppTabs, {AppTabsProps} from "@/app/home/csm/tabs";
 import {getCustomers} from "@/services/customers";
@@ -16,7 +15,6 @@ export default async function List({searchParams}: any ) {
     const isPending = searchParams.status === 'pending' || !searchParams.status;
     const phases = await getJourneyPhases()
     const sessions = await getSessions(isPending)
-    const products = await getProducts();
     const customers = await getCustomers();
 
 
@@ -111,7 +109,7 @@ export default async function List({searchParams}: any ) {
                         <p className={'text-primarySmall'}>Create new session</p>
                     </ModalHeader>
                     <ModalBody>
-                        <CSMForm phases={phases.phases} products={products.products} customers={customers}/>
+                        <CSMForm phases={phases.phases} customers={customers}/>
                     </ModalBody>
                 </ModalContent>
             </Modal>
