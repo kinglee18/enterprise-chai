@@ -18,8 +18,8 @@ export default function ChatBox({message}: ChatBoxProps) {
 
     const onLike = async () => {
         try {
-            const response = await sendFeedback(message.message_id, true);
             setIsLiked(true)
+            const response = await sendFeedback(message.message_id, true);
             console.log(response);
         } catch (e) {
             console.log(e);
@@ -27,8 +27,8 @@ export default function ChatBox({message}: ChatBoxProps) {
     }
     const onDislike = async () => {
         try {
-            const response = await sendFeedback(message.message_id, false);
             setIsLiked(false)
+            const response = await sendFeedback(message.message_id, false);
             console.log(response);
         } catch (e) {
             console.log(e);

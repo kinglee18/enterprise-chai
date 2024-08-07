@@ -1,6 +1,8 @@
 import {useMarkdownProcessor} from "@/hooks/markdown";
 import {utcHourToLocale} from "@/utils";
 import {HiOutlineHandThumbDown, HiOutlineHandThumbUp} from "react-icons/hi2";
+import {sendFeedback} from "@/services/feedback";
+import {useState} from "react";
 
 const orderByDate = (a, b) => {
     return new Date(a.created_at) - new Date(b.created_at);
@@ -47,7 +49,7 @@ export default function Transcript ({ data , summaryInfo }:
                             {message.response_feedback !== null && (
                                 <>
 
-                                    <Message message={message.response_feedback}/>
+                                    <Message message={message.response_feedback} id={message.message_id}/>
                                 </>
 
                             )}
@@ -60,18 +62,40 @@ export default function Transcript ({ data , summaryInfo }:
     );
 };
 
-const Message = ({ message }) => {
+const Message = ({ message, id }) => {
     const content = useMarkdownProcessor(message.rag_response);
+    const [isLiked, setIsLiked] = useState(message.response_feedback);
+
+    const onLike = async () => {
+        try {
+            setIsLiked(true)
+            const response = await sendFeedback(id, true);
+            console.log(response);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    const onDislike = async () => {
+        try {
+            setIsLiked(false)
+            const response = await sendFeedback(id, false);
+            console.log(response);
+        } catch (e) {
+            console.log(e);
+        }
+    }
     return <div className={'w-3/6 p-4 bg-white rounded-xl shadow-md  '}>
         <p className={'text-sm font-semibold text-gray-600 mb-2'}>Feedback:</p>{content}
         <div className={'flex gap-3 justify-end'}>
 
             {message.response_feedback !== null && <div className={'flex gap-3'}>
                 <HiOutlineHandThumbUp
-                    className={` ${message.response_feedback ? 'text-green-500' : 'text-gray-500'}`}
+                    className={` ${isLiked ? 'text-green-500' : 'text-gray-500'}`}
+                    onClick={() => onLike(id)}
                 />
                 <HiOutlineHandThumbDown
-                    className={` ${message.response_feedback === false ? 'text-red-500': 'text-gray-500' }`}
+                    className={` ${isLiked === false ? 'text-red-500': 'text-gray-500' }`}
+                    onClick={() => onDislike(id)}
                 />
             </div>
             }
